@@ -1,8 +1,10 @@
-biopython
-pandas
-numpy
+numpy==1.26.4
 nltk
 spacy
 scispacy
-gensim
 pyLDAvis
+sentence-transformers==2.2.2  
+gensim==4.2.0
+pandas==1.3.3
+biopython==1.79
+
