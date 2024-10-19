@@ -1,4 +1,5 @@
 # scripts/pubmed_fetch.py
+import logging, time
 from Bio import Entrez
 import pandas as pd
 from sentence_transformers import SentenceTransformer
@@ -9,6 +10,11 @@ Entrez.email = 'mmm443@cornell.edu'  # Add your email here
 # Load PubMedBERT model
 model = SentenceTransformer("NeuML/pubmedbert-base-embeddings")
 print("Model loaded successfully!")
+logging.info("Model loaded successfully!")
+
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 # Function to find synonyms using PubMedBERT embeddings
 def get_similar_terms(terms, threshold=0.7):
@@ -24,19 +30,27 @@ def get_similar_terms(terms, threshold=0.7):
     
     return list(expanded_terms)
 
-def search(query):
-    handle = Entrez.esearch(db='pubmed', sort='relevance', retmax='100', retmode='xml', term=query)
-    results = Entrez.read(handle)
-    return results
+def search(query, retstart=0, retmax=1000):
+    try:
+        handle = Entrez.esearch(db='pubmed', sort='relevance', retstart=retstart, retmax=retmax, retmode='xml', term=query)
+        results = Entrez.read(handle)
+        return results
+    except Exception as e:
+        logging.error(f"Error fetching PubMed search results: {e}")
+        return None
 
 def fetch_details(id_list):
-    ids = ','.join(id_list)
-    handle = Entrez.efetch(db='pubmed', retmode='xml', id=ids)
-    results = Entrez.read(handle)
-    return results
+    try:
+        ids = ','.join(id_list)
+        handle = Entrez.efetch(db='pubmed', retmode='xml', id=ids)
+        results = Entrez.read(handle)
+        return results
+    except Exception as e:
+        logging.error(f"Error fetching PubMed details: {e}")
+        return None
 
 # Fetch PubMed data with expanded terms
-def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms, max_results=100):
+def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms, max_results=1000):
     # Expand the terms using PubMedBERT
     expanded_mental_health_terms = get_similar_terms(mental_health_terms)
     expanded_epigenetic_terms = get_similar_terms(epigenetic_terms)
@@ -52,34 +66,47 @@ def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, s
     )
 
     print(f"Generated Query: {query}")
+    logging.info(f"Generated Query: {query}")
 
     # Search PubMed with the generated query
-    studies = search(query)
-    id_list = studies['IdList']
+    all_article_data = []
+    retstart = 0
+    while len(all_article_data) < max_results:
+        studies = search(query, retstart=retstart)
+        if studies is None:
+            break  # Exit loop if there's an error
 
-    # Fetch details for the returned PubMed IDs
-    details = fetch_details(id_list)
+        id_list = studies.get('IdList', [])
+        if not id_list:
+            logging.info(f"No more results found at retstart={retstart}.")
+            break  # No more results to fetch
 
-    # Extract relevant information from the articles
-    article_data = []
-    for article in details['PubmedArticle']:
-        try:
-            title = article['MedlineCitation']['Article']['ArticleTitle']
-            abstract = article['MedlineCitation']['Article']['Abstract']['AbstractText'][0]
-            journal = article['MedlineCitation']['Article']['Journal']['Title']
-            article_data.append({'Title': title, 'Abstract': abstract, 'Journal': journal})
-            pass
-        except KeyError:
-            continue
+        details = fetch_details(id_list)
+        if details is None:
+            break  # Exit loop if there's an error
+
+        # Extract relevant information from the articles
+        for article in details['PubmedArticle']:
+            try:
+                title = article['MedlineCitation']['Article']['ArticleTitle']
+                abstract = article['MedlineCitation']['Article'].get('Abstract', {}).get('AbstractText', [''])[0]
+                journal = article['MedlineCitation']['Article']['Journal']['Title']
+                all_article_data.append({'Title': title, 'Abstract': abstract, 'Journal': journal})
+            except KeyError:
+                continue
+
+        # Increment retstart to fetch next batch of results
+        retstart += len(id_list)
+        time.sleep(1)  # Be mindful of API rate limits
 
     # Convert the data to a DataFrame
-    df = pd.DataFrame(article_data)
+    df = pd.DataFrame(all_article_data[:max_results])
     return df
 
 
 def save_to_csv(df, filename):
     df.to_csv(filename, index=False)
-    print(f"Data saved to {filename}")
+    logging.info(f"Data saved to {filename}")
 
 if __name__ == "__main__":
     # Core mental health and epigenetic terms for querying
