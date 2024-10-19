@@ -27,11 +27,14 @@ socioeconomic_terms = ["socioeconomic status", "income inequality", "poverty", "
 
 # Preprocessing function to clean the text, tokenize, remove stopwords, and lemmatize
 def preprocess_text(abstract):
+    if not isinstance(abstract, str) or abstract.strip() == "":
+        return []  # Return empty list if abstract is missing or invalid
+
     # Convert to lowercase
     abstract = abstract.lower()
     
-    # Remove punctuation and special characters
-    abstract = re.sub(r'\W+', ' ', abstract)
+    # Remove special characters but keep alphanumeric terms like DNA and numbers
+    abstract = re.sub(r'[^\w\s]', ' ', abstract)
     
     # Tokenize the text
     tokens = word_tokenize(abstract)
