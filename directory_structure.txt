@@ -1,0 +1,13 @@
+epigenomic_nlp_project/
+│
+├── data/                   # Directory for storing data
+│   └── pubmed_articles.csv  # Store your articles here after retrieval
+│
+├── scripts/                # Directory for your Python scripts
+│   ├── __init__.py         # Makes scripts a Python package
+│   ├── pubmed_fetch.py     # Script for fetching PubMed data
+│   ├── preprocessing.py    # Script for preprocessing abstracts
+│   ├── topic_modeling.py   # Script for topic modeling
+│   └── main.py             # Main script to run the pipeline
+│
+└── requirements.txt        # File listing dependencies (optional)
