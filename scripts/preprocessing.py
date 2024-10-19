@@ -16,14 +16,14 @@ nlp = spacy.load('en_core_sci_lg')
 
 # Stopwords: Combining your stopwords and their custom stopwords
 stop_words = set(stopwords.words('english'))
-custom_stopwords = {"study", "results", "control", "significant"}
+custom_stopwords = {"study", "results", "control", "significant", "the", "or", "and", "across", "factor", "health"}
 stop_words.update(custom_stopwords)
 
 # Keywords from your code to categorize the abstracts
 mental_health_terms = ["depression", "bipolar", "PTSD", "anxiety", "suicide"]
-epigenetic_terms = ["DNA methylation", "histone modification", "gene expression"]  
-ethnographic_terms = ["race", "ethnicity", "African American", "Latino", "Caucasian", "Asian", "Native American", "Hispanic", "Indigenous", "Arab", "Middle Eastern"]
-socioeconomic_terms = ["socioeconomic status", "income inequality", "poverty", "social class", "education disparity", "economic hardship"]
+epigenetic_terms = ["methylation", "modification", "aging"]  
+ethnographic_terms = ["Black", "Latino", "Caucasian", "Asian", "Native American", "Hispanic", "Middle Eastern"]
+socioeconomic_terms = ["socioeconomic status", "income inequality", "poverty", "social class", "economic hardship"]
 
 # Preprocessing function to clean the text, tokenize, remove stopwords, and lemmatize
 def preprocess_text(abstract):
@@ -64,7 +64,10 @@ def preprocess_text(abstract):
 
 # Function to categorize abstracts based on predefined terms
 def categorize_text(text, keywords):
-    found_keywords = [keyword for keyword in keywords if keyword.lower() in text.lower()]
+    if not isinstance(text, str):  # Check if the text is valid (not NaN)
+        return 'None'
+    
+    found_keywords = [keyword for keyword in keywords if keyword in text]
     return ', '.join(found_keywords) if found_keywords else 'None'
 
 # Preprocess abstracts: Tokenize, lemmatize, and categorize by your four dimensions
