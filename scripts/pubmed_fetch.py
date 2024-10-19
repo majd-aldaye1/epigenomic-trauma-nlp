@@ -30,7 +30,7 @@ def get_similar_terms(terms, threshold=0.7):
     
     return list(expanded_terms)
 
-def search(query, retstart=0, retmax=1000):
+def search(query, retstart=0, retmax=10000):
     try:
         handle = Entrez.esearch(db='pubmed', sort='relevance', retstart=retstart, retmax=retmax, retmode='xml', term=query)
         results = Entrez.read(handle)
@@ -60,9 +60,9 @@ def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, s
     # Build a dynamic query using all expanded term lists
     query = (
         f"({' OR '.join(expanded_mental_health_terms)}) AND "
-        f"({' OR '.join(expanded_epigenetic_terms)}) AND "
-        f"({' OR '.join(expanded_ethnographic_terms)}) AND "
-        f"({' OR '.join(expanded_socioeconomic_terms)}) AND"
+        f"({' OR '.join(expanded_epigenetic_terms)}) OR "
+        f"({' OR '.join(expanded_ethnographic_terms)}) OR "
+        f"({' OR '.join(expanded_socioeconomic_terms)})"
     )
 
     print(f"Generated Query: {query}")
