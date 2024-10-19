@@ -40,7 +40,7 @@ def preprocess_text(abstract):
     tokens = word_tokenize(abstract)
     
     # Remove stopwords
-    tokens = [token for token in tokens if token not in stop_words]
+    tokens = [token for token in tokens if token not in stop_words and not re.search(r'\d', token) and len(token)>2]
     
     # Apply the biomedical model to the tokens
     doc = nlp(' '.join(tokens))

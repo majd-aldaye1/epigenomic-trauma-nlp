@@ -62,7 +62,7 @@ def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, s
         f"({' OR '.join(expanded_mental_health_terms)}) AND "
         f"({' OR '.join(expanded_epigenetic_terms)}) AND "
         f"({' OR '.join(expanded_ethnographic_terms)}) AND "
-        f"({' OR '.join(expanded_socioeconomic_terms)}) AND trauma"
+        f"({' OR '.join(expanded_socioeconomic_terms)}) AND"
     )
 
     print(f"Generated Query: {query}")
@@ -120,3 +120,4 @@ if __name__ == "__main__":
     # Fetch data using the expanded terms
     df = get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms)
     save_to_csv(df, 'data/pubmed_articles.csv')
+    print(len(df))

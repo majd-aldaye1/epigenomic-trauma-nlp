@@ -10,8 +10,8 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 def generate_ngrams(tokenized_texts):
     """Generate bigrams and trigrams from tokenized texts."""
-    bigram = Phrases(tokenized_texts, min_count=5, threshold=10)
-    trigram = Phrases(bigram[tokenized_texts], threshold=10)
+    bigram = Phrases(tokenized_texts, min_count=3, threshold=3)
+    trigram = Phrases(bigram[tokenized_texts], threshold=3)
 
     bigram_phraser = Phraser(bigram)
     trigram_phraser = Phraser(trigram)
@@ -34,6 +34,7 @@ def build_topic_model(processed_texts, num_topics=10, passes=15):
     """Build the LDA model based on the tokenized, processed texts."""
     # Create a dictionary from the preprocessed text
     dictionary = corpora.Dictionary(processed_texts)
+    dictionary.filter_extremes(no_above=0.9)
 
     # Create a corpus: a bag-of-words representation of the texts
     corpus = [dictionary.doc2bow(text) for text in processed_texts]
