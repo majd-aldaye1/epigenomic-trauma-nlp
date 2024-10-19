@@ -9,6 +9,7 @@ import plotly.graph_objects as go
 def load_data():
     try:
         df = pd.read_csv('data/preprocessed_pubmed_articles.csv')
+        print(df.columns)
         return df
     except FileNotFoundError:
         print("Error: The file 'preprocessed_pubmed_articles.csv' was not found.")
