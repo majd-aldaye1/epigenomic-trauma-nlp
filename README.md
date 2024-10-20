@@ -1,4 +1,4 @@
-﻿# CAP-Epigenomics-Analysis_ma798_mmm443
+﻿﻿# CAP-Epigenomics-Analysis_ma798_mmm443
 ## README
 
 # Project: Epigenomic Analysis
@@ -14,7 +14,11 @@ To run the demo:
    ```bash
    git clone git@github.coecis.cornell.edu:cs4701-24fa-projects/CAP_Epigenomics-Analysis_ma798_mmm443.git
    ```
-2. **Install dependencies**:
+2. **Go to the right directory**:
+   ```
+   cd .\CAP_Epigenomics-Analysis_ma798_mmm443\
+   ```
+4. **Install dependencies**:
    Ensure all required dependencies are installed by running:
    ```bash
    pip install -r requirements.txt
