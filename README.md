@@ -7,28 +7,24 @@ This project analyzes how mental health disorders impact epigenetic markers, wit
 
 ---
 
-### Reproducibility
-
-To reproduce the entire demo:
+### Demo Script
+To run the demo:
 
 1. **Clone the repository**:
    ```bash
    git clone git@github.coecis.cornell.edu:cs4701-24fa-projects/CAP_Epigenomics-Analysis_ma798_mmm443.git
    ```
-
 2. **Install dependencies**:
    Ensure all required dependencies are installed by running:
    ```bash
    pip install -r requirements.txt
    ```
-
 3. **Fetch data from PubMed**:
    - Run the PubMed fetching script:
      ```bash
      python scripts/pubmed_fetch.py
      ```
    - Verify the `data/pubmed_articles.csv` file is generated.
-
 4. **Preprocess data**:
    - Run the preprocessing script:
      ```bash
@@ -51,9 +47,6 @@ To reproduce the entire demo:
    - Open your browser and navigate to `http://127.0.0.1:8050/` to view the interactive dashboard.
 
 ---
----
-
-### Demo Script
 
 #### Team Members & Responsibilities:
 
