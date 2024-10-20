@@ -1,82 +1,103 @@
 import gensim
+import pandas as pd
 from gensim import corpora
 import json
 import logging
 import os
 import pyLDAvis
 import pyLDAvis.gensim_models as gensimvis
-from gensim.models.phrases import Phrases, Phraser
-from sklearn.feature_extraction.text import TfidfVectorizer
 
-def generate_ngrams(tokenized_texts):
-    """Generate bigrams and trigrams from tokenized texts."""
-    bigram = Phrases(tokenized_texts, min_count=3, threshold=3)
-    trigram = Phrases(bigram[tokenized_texts], threshold=3)
+# Setup logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-    bigram_phraser = Phraser(bigram)
-    trigram_phraser = Phraser(trigram)
-
-    return [trigram_phraser[bigram_phraser[text]] for text in tokenized_texts]
-
-
-def apply_tfidf(corpus):
-    """Apply TF-IDF weighting to the corpus."""
-    # Convert list of lists into a joined string format for TF-IDF
-    docs_as_texts = [' '.join(doc) for doc in corpus]
-    tfidf_vectorizer = TfidfVectorizer(max_features=1000)
-    tfidf_matrix = tfidf_vectorizer.fit_transform(docs_as_texts)
-    
-    # Return the TF-IDF weighted corpus
-    return tfidf_matrix, tfidf_vectorizer
-
-# Build topic model with optimized hyperparameters using Bag-of-Words
-def build_topic_model(processed_texts, num_topics=10, passes=15):
-    """Build the LDA model based on the tokenized, processed texts."""
-    # Create a dictionary from the preprocessed text
+# Function to build the LDA model
+def build_topic_model(processed_texts, num_topics=5, passes=100):
+    # logging.info("Building dictionary from processed texts...")
     dictionary = corpora.Dictionary(processed_texts)
-    dictionary.filter_extremes(no_above=0.9)
 
-    # Create a corpus: a bag-of-words representation of the texts
+    # logging.info("Creating corpus (bag-of-words representation)...")
     corpus = [dictionary.doc2bow(text) for text in processed_texts]
 
-    # Build LDA model with tuned hyperparameters
-    lda_model = gensim.models.ldamodel.LdaModel(
-        corpus=corpus, num_topics=num_topics, id2word=dictionary, 
-        passes=passes, alpha='auto', eta='auto'
-    )
-
+    # logging.info(f"Training LDA model with {num_topics} topics and {passes} passes...")
+    lda_model = gensim.models.ldamodel.LdaModel(corpus=corpus, num_topics=num_topics, id2word=dictionary, passes=passes)
+    logging.info("LDA model training complete!")
+    
     return lda_model, dictionary, corpus
 
-def print_topics(lda_model, num_words=5):
+# Function to print topics from the LDA model
+def print_topics(lda_model, num_words=20):
+    # logging.info(f"Displaying the top {num_words} words from each topic:")
     topics = lda_model.print_topics(num_words=num_words)
     for topic in topics:
         print(topic)
+
+# Function to save the model, dictionary, and corpus for later use
+def save_model(lda_model, dictionary, corpus, model_path='models'):
+    if not os.path.exists(model_path):
+        os.makedirs(model_path)
+    logging.info(f"Saving LDA model to {model_path}/lda_model...")
+    lda_model.save(f'{model_path}/lda_model')
+    logging.info(f"Saving dictionary to {model_path}/dictionary.dict...")
+    dictionary.save(f'{model_path}/dictionary.dict')
+    logging.info(f"Saving corpus to {model_path}/corpus.mm...")
+    corpora.MmCorpus.serialize(f'{model_path}/corpus.mm', corpus)
+    logging.info("Model, dictionary, and corpus saved successfully!")
 
 # Function to visualize the LDA model using pyLDAvis
 def visualize_topics(lda_model, corpus, dictionary):
     logging.info("Visualizing LDA model with pyLDAvis...")
     lda_display = gensimvis.prepare(lda_model, corpus, dictionary, sort_topics=False)
-    pyLDAvis.save_html(lda_display, 'lda_visualization.html')
-    logging.info("LDA model visualization saved as 'lda_visualization.html'. Open this file in a browser to view it.")
+    pyLDAvis.save_html(lda_display, 'models/lda_visualization.html')
+    logging.info("LDA model visualization saved as 'models/lda_visualization.html'. Open this file in a browser to view it.")
 
 if __name__ == "__main__":
-    import pandas as pd
-    df = pd.read_csv('data/preprocessed_pubmed_articles.csv')
+    logging.info("Loading preprocessed PubMed articles from CSV...")
     
-    # Convert the JSON-encoded strings back to lists
-    df['Processed_Abstract'] = df['Processed_Abstract'].apply(json.loads)
+    try:
+        # Ensure correct column names
+        column_names = ['Title', 'Abstract', 'Journal', 'Processed_Abstract', 
+                        'Mental_Health_Terms', 'Epigenetic_Terms', 
+                        'Socioeconomic_Terms', 'Ethnographic_Terms']
+        
+        # Load the CSV with correct headers
+        df = pd.read_csv('data/preprocessed_pubmed_articles.csv', header=None, names=column_names)
+    except FileNotFoundError as e:
+        logging.error(f"Error: {e}")
+        exit()
+
+    # Check if the 'Processed_Abstract' column exists and handle missing data
+    if 'Processed_Abstract' in df.columns:
+        logging.info("Converting JSON-encoded strings back to token lists...")
+
+        def safe_json_loads(x):
+            try:
+                if pd.notnull(x) and x.strip():  # Check if not null and not empty
+                    return json.loads(x)
+                else:
+                    return []  # Return empty list if it's invalid or empty
+            except json.JSONDecodeError:
+                logging.warning(f"Failed to decode JSON for row: {x}")
+                return []  # Return empty list if decoding fails
+
+        df['Processed_Abstract'] = df['Processed_Abstract'].apply(safe_json_loads)
+    else:
+        logging.error("Processed_Abstract column is missing in the CSV.")
+        exit()
+
+    # Verify that each row in Processed_Abstract is a list of tokens
+    assert all(isinstance(row, list) for row in df['Processed_Abstract']), "Each processed abstract must be a list of tokens"
     
-    # Tokenized data
+    # Extract tokenized texts as a list for Gensim
     all_tokens = df['Processed_Abstract'].tolist()
-    
-    # 1. Generate n-grams (bigrams and trigrams)
-    tokenized_texts_with_ngrams = generate_ngrams(all_tokens)
-    
-    # 2. Apply TF-IDF
-    tfidf_matrix, tfidf_vectorizer = apply_tfidf(tokenized_texts_with_ngrams)
-    
-    # Use the tokenized texts with n-grams for LDA model creation
-    lda_model, dictionary, corpus = build_topic_model(tokenized_texts_with_ngrams, num_topics=5, passes=20)
+
+    # Build the LDA model
+    lda_model, dictionary, corpus = build_topic_model(all_tokens, num_topics=5, passes=20)
+
+    # Print the top 15 words from each topic
     print_topics(lda_model)
+
+    # Save the model, dictionary, and corpus
+    save_model(lda_model, dictionary, corpus, model_path='models')
+
+    # Optionally, visualize the LDA model using pyLDAvis
     visualize_topics(lda_model, corpus, dictionary)
-    

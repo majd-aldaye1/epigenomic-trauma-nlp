@@ -1,20 +1,19 @@
-# scripts/pubmed_fetch.py
-import logging, time
+import logging
 from Bio import Entrez
 import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sentence_transformers import util
+import time
 
+# Setup logging (this should be set up early)
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+# Set Entrez email
 Entrez.email = 'mmm443@cornell.edu'  # Add your email here
 
 # Load PubMedBERT model
 model = SentenceTransformer("NeuML/pubmedbert-base-embeddings")
-print("Model loaded successfully!")
 logging.info("Model loaded successfully!")
-
-# Setup logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
-
 
 # Function to find synonyms using PubMedBERT embeddings
 def get_similar_terms(terms, threshold=0.7):
@@ -30,7 +29,8 @@ def get_similar_terms(terms, threshold=0.7):
     
     return list(expanded_terms)
 
-def search(query, retstart=0, retmax=10000):
+# Search PubMed
+def search(query, retstart=0, retmax=100):
     try:
         handle = Entrez.esearch(db='pubmed', sort='relevance', retstart=retstart, retmax=retmax, retmode='xml', term=query)
         results = Entrez.read(handle)
@@ -39,6 +39,7 @@ def search(query, retstart=0, retmax=10000):
         logging.error(f"Error fetching PubMed search results: {e}")
         return None
 
+# Fetch PubMed article details
 def fetch_details(id_list):
     try:
         ids = ','.join(id_list)
@@ -50,7 +51,7 @@ def fetch_details(id_list):
         return None
 
 # Fetch PubMed data with expanded terms
-def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms, max_results=1000):
+def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms, max_results=100):
     # Expand the terms using PubMedBERT
     expanded_mental_health_terms = get_similar_terms(mental_health_terms)
     expanded_epigenetic_terms = get_similar_terms(epigenetic_terms)
@@ -65,10 +66,8 @@ def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, s
         f"({' OR '.join(expanded_socioeconomic_terms)})"
     )
 
-    print(f"Generated Query: {query}")
     logging.info(f"Generated Query: {query}")
 
-    # Search PubMed with the generated query
     all_article_data = []
     retstart = 0
     while len(all_article_data) < max_results:
@@ -93,16 +92,21 @@ def get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, s
                 journal = article['MedlineCitation']['Article']['Journal']['Title']
                 all_article_data.append({'Title': title, 'Abstract': abstract, 'Journal': journal})
             except KeyError:
+                logging.warning(f"Missing expected fields in article: {article}")
                 continue
 
         # Increment retstart to fetch next batch of results
         retstart += len(id_list)
         time.sleep(1)  # Be mindful of API rate limits
 
-    # Convert the data to a DataFrame
+        # Break if we exceed max_results
+        if len(all_article_data) >= max_results:
+            logging.info(f"Reached max_results limit of {max_results}.")
+            break
+
+    # Convert the data to a DataFrame, ensuring it only contains max_results entries
     df = pd.DataFrame(all_article_data[:max_results])
     return df
-
 
 def save_to_csv(df, filename):
     df.to_csv(filename, index=False)
@@ -118,6 +122,5 @@ if __name__ == "__main__":
     socioeconomic_terms = ["socioeconomic status", "income inequality", "poverty", "social class", "education disparity", "economic hardship"]
 
     # Fetch data using the expanded terms
-    df = get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms)
+    df = get_pubmed_data(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms, max_results=500)
     save_to_csv(df, 'data/pubmed_articles.csv')
-    print(len(df))
