@@ -4,6 +4,7 @@ import pandas as pd
 from sentence_transformers import SentenceTransformer
 from sentence_transformers import util
 import time
+from scholarly import scholarly
 
 # Setup logging (this should be set up early)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
