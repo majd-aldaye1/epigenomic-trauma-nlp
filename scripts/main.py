@@ -18,7 +18,7 @@ def load_preprocessed_data(filepath):
     return df
 
 # Load the dataset
-df = load_preprocessed_data('data/preprocessed_pubmed_articles.csv')
+df = load_preprocessed_data('data/preprocessed_pdf_content.csv')
 
 # Initialize Dash app
 app = dash.Dash(__name__)

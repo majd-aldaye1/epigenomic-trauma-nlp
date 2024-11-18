@@ -11,11 +11,11 @@ os.environ["HF_HUB_DISABLE_SYMLINKS"] = "1"
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 # Load PubMedBERT model
-model = SentenceTransformer("NeuML/pubmedbert-base-embeddings")
+model = SentenceTransformer("NeuML/pubmedbert-base-embeddings") # *********
 logging.info("Model loaded successfully!")
 
 # Function to find synonyms using PubMedBERT embeddings
-def get_similar_terms(terms, threshold=0.7):
+def get_similar_terms(terms, threshold=0.1):
     term_embeddings = model.encode(terms)
     similarity_matrix = util.cos_sim(term_embeddings, term_embeddings)
     
@@ -25,7 +25,8 @@ def get_similar_terms(terms, threshold=0.7):
         for j, score in enumerate(similarity_matrix[i]):
             if i != j and score > threshold:  # Use the threshold to find similar terms
                 expanded_terms.add(terms[j])
-    
+
+    similar_terms.write(f"{expanded_terms}\n")
     return list(expanded_terms)
 
 # Generate the query
@@ -46,7 +47,7 @@ def generate_query(mental_health_terms, epigenetic_terms, ethnographic_terms, so
     return query
 
 # Fetch papers using PyPaperBot
-def fetch_papers(query, scholar_pages=1, min_year=2000, output_dir="./data/papers"):
+def fetch_papers(query, scholar_pages=1, min_year=2000, output_dir="./data/testing_folder"):
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
@@ -67,6 +68,7 @@ def fetch_papers(query, scholar_pages=1, min_year=2000, output_dir="./data/paper
         logging.error(f"Error fetching papers with PyPaperBot: {e}")
 
 if __name__ == "__main__":
+    similar_terms = open('./similar_terms.txt', 'w')
     # Core mental health and epigenetic terms for querying
     mental_health_terms = ["depression", "bipolar", "PTSD", "anxiety", "suicide"]
     epigenetic_terms = ["DNA methylation", "histone modification", "gene expression"]
@@ -83,6 +85,7 @@ if __name__ == "__main__":
 
     # Generate the query
     query = generate_query(mental_health_terms, epigenetic_terms, ethnographic_terms, socioeconomic_terms)
+    similar_terms.close()
 
     # Fetch papers using the generated query
-    fetch_papers(query)
+    #fetch_papers(query)
