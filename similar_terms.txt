@@ -1,4 +1,37 @@
-{'PTSD', 'anxiety', 'bipolar', 'suicide', 'depression'}
-{'DNA methylation', 'histone modification', 'gene expression'}
-{'Latino', 'ethnicity', 'African American', 'Native American', 'Hispanic', 'Indigenous', 'Arab', 'Asian', 'Middle Eastern', 'Caucasian', 'race'}
-{'income inequality', 'economic hardship', 'education disparity', 'poverty', 'socioeconomic status', 'social class'}
+Mental Health Terms:
+depression: depression, depressions, depresion, manic-depression, Depression, depression-related, anti-depression, depressive, anxiety, depression-like, depression., psychosis, depressives, sleeplessness, deprevation
+bipolar: bipolar, bi-polar, bipolarity, Bipolar, unipolar, Bi-polar, bipolars, ambipolar, manic-depressive, uni-polar, schizophrenic, multipolar, monopolar, schizoid, psychotic
+PTSD: PTSD, C-PTSD, PTSS, PSTD, post-trauma, post-traumatic, CTSD, mTBI, P.T.S.D., traumatization, MTBI, non-trauma, trauma, psychopathology, posttraumatic
+anxiety: anxiety, anxiousness, nervousness, anxieties, anxiety-related, fearfulness, fear, uneasiness, anxiety-provoking, discomfort, sleeplessness, anxiety-inducing, anger, unhappiness, sadness
+suicide: suicide, suicides, parasuicide, non-suicide, suicidal, murder-suicide, suicided, suicider, suicide-related, mass-suicide, sucide, anti-suicide, suicide-bombing, suicide-bomber, suicide-bomb
+
+
+Epigenetic Terms:
+DNA methylation: DNA, DNA-DNA, RNA-DNA, DNA-, nDNA, cpDNA, ctDNA, non-DNA, cccDNA, DNA-protein, mDNA, A-DNA, methylation, DNA., y-DNA
+histone modification: histone, modification, histones, modifications, alteration, Histone, chromatin, multimer, intron, alterations, helicase, modifiying, resequence, ubiquitin, GAPDH
+gene expression: gene, expression, genes, gene-expression, transgene, mutation, pseudogene, gene-, gene-gene, gene., allele, multi-gene, genome, multigene, phenotype
+
+
+Ethnographic Terms:
+race: race, races, race--and, non-race, race-, racing, sub-race, multi-race, race-by-race, super-race, race-off, 17-race, 12-race, race-track, four-race
+ethnicity: ethnicity, ethnicity-, nationality, race-ethnicity, ethnicities, sub-ethnicity, Ethnicity, ethnic, ethnicization, ethnicity-related, ethnicism, ethnicty, etnicity, ethnicity-based, ethnicy
+African American: African, American, Africa-American, AfricanAmerican, West-African, North-African, East-African, African-American, South-African, SAfrican, Non-African, African-american, Asian, Afro-American, African-
+Latino: Latino, Hispanic, Latinos, non-Latino, Hispanic-American, Afro-Latino, Latino-American, Latinx, Latina, Hispanic-, latino, Hispanics, non-Latinos, Latin-American, Latinas
+Caucasian: Caucasian, Caucasian-American, caucasian, non-Caucasian, Caucasians, Trans-Caucasian, Caucasion, Dene-Caucasian, Sino-Caucasian, African-American, Ibero-Caucasian, Asian, Caucasoid, Eurasian, Transcaucasian
+Asian: Asian, East-Asian, South-Asian, Asian-, non-Asian, Pan-Asian, Asian-Pacific, Asianist, Afro-Asian, Asian-Australian, Asian-based, Asian-European, Asian-American, Asian-Indian, Asian-related
+Native American: Native, American, Native-American, Indian, Ameican, Non-Native, Amerian, North-American, African, Americian, non-Native, Amercian, -American, USAmerican, Euro-American
+Hispanic: Hispanic, Hispanic-American, Latino, Hispanic-, Hispanics, non-Hispanic, non-Latino, Latino-American, Hispanic-Americans, Non-Hispanic, Latinos, Latin-American, Afro-Latino, African-American, Afro-Hispanic
+Indigenous: Indigenous, Aboriginal, Non-Indigenous, non-Indigenous, indigenous, Non-indigenous, Indigenous-specific, non-indigenous, Aboriginals, Aboriginality, Nonindigenous, aboriginal, Indigenist, non-Aboriginal, Indigneous
+Arab: Arab, Arab-Muslim, Non-Arab, non-Arab, American-Arab, Arab-, Arab-Palestinian, arab, Pan-Arab, Arab-speaking, Arab-West, Afro-Arab, Arab-African, Sunni-Arab, pre-Arab
+Middle Eastern: Middle, Eastern, East, MIddle, Western, West, East-based, MiddleEast, East-North, Easten, MiddleEastern, Central, Middles, -East, non-Middle
+
+
+Socioeconomic Terms:
+socioeconomic status: status, socioeconomic, statuses, socio-economic, status-, non-status, social-economic, economic, status-based, socio-economical, sociocultural, socio-political, status., -status, special-status
+income inequality: income, inequality, inequalities, incomes, inequal, unequality, wealth, non-income, inequity, income-related, disparity, income-, poverty, non-taxation, income-earning
+poverty: poverty, poverty-, poverty., poverty-line, poverty-related, near-poverty, poverties, povery, poverty-level, poverty-alleviation, poverty-environment, impoverishment, homelessness, poverty-ridden, joblessness
+social class: social, class, social-class, non-class, pre-class, class-related, class-system, social-economic, inter-class, class-oriented, political, class-driven, politico-social, economic, cross-class
+education disparity: disparity, education, disparities, eduction, unequality, inequality, inequity, educational, eduaction, mis-education, educability, schooling, diversity, reducation, disproportion
+economic hardship: hardship, economic, social, financial, hardships, political, socio-economic, social-economic, econmic, conomic, socio-economical, socioeconomic, socio-political, economical, economic-political
+
+

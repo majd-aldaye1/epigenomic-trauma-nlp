@@ -1,0 +1,33 @@
+Mental Health Terms:
+depression: depression-related, post-Depression, alcoholism, psychosis, depression, recession, Depression, insomnia, anxiety, manic-depression
+bipolar: bipolarity, uni-polar, Unipolar, schizoid, bipolar, schizophrenic, Bipolar, unipolar, bipolars, bi-polar
+PTSD: psychosis, post-traumatic, mTBI, trauma, PTSD, psychopathology, post-trauma, PSTD, P.T.S.D., C-PTSD
+anxiety: anxiousness, discomfort, fear, anxiety-related, anxiety, Anxiety, paranoia, uneasiness, unease, anger
+suicide: Suicide, suicide-bombing, murder, anti-suicide, suicide, homicide, parasuicide, suicidal, sucide, suicides
+
+Epigenetic Terms:
+DNA methylation: DNA-protein, mDNA, RNA, cccDNA, DNA, DNAs, A-DNA, nDNA, DNA-, DNA-DNA
+histone modification: resequence, multimer, modifications, intron, histone, acetylation, Histone, chromatin, modification, helicase
+gene expression: expression, phenotype, allele, transgene, gene, pseudogene, genome, genes, genotype, genetic
+
+Ethnographic Terms:
+race: non-race, race., 17-race, racing, race, race--and, race-off, mid-race, race-, races
+ethnicity: ethicity, ethnicty, ethnicity-related, gender, ethnicity, ethnicities, ethnics, ancestry, ethnic, ethnicity-
+African American: Ameican, West-African, Asian, Africa-American, African, SAfrican, European, Afican, Afro-American, American
+Latino: Afro-Latino, Latina, Latino-American, Chicano, Latino, Hispano, latino, non-Latino, Latinos, Hispanic-American
+Caucasian: Caucasion, Asian, Caucasia, non-Caucasian, Caucasian, African, Caucasian-American, Mongoloid, Caucasoid, caucasian
+Asian: East-Asian, South-Asian, Asians, Asian-Pacific, Asian, non-Asian, Chinese, Asiatic, African, Eurasian
+Native American: Native-American, Canadian, Natives, African, American, Mexican, Indian, Candian, Americans, Native
+Hispanic: Mexican-American, non-Hispanic, Hispanic-Americans, Hispanics, Hispanic, Hispanism, Latino, hispanic, Afro-Latino, non-Latino
+Indigenous: Native, Indigenist, Aboriginal, Aboriginals, Australian, non-indigenous, Indigenous, Aborginal, aboriginal, indigenous
+Arab: Palestinian, Arab-Muslim, Arabian, arab, Arab, Arabs, Non-Arab, Muslim, American-Arab, non-Arab
+Middle Eastern: Mid-Eastern, North, East-based, Northern, Middle, East-North, East, Eastern, Midle, MIddle
+
+Socioeconomic Terms:
+socioeconomic status: socio-demographic, status-, social-economic, sociocultural, status, higher-status, status., social, status-based, socioeconomic
+income inequality: non-income, inequity, poverty, non-taxation, inequality, equality, incomes, earnings, wealth, income
+poverty: malnutrition, near-poverty, impoverishment, Poverty, poverty-, misery, poverty-line, squalor, inequality, poverty
+social class: one-class, pre-social, social-economic, social-class, class, socal, economic, non-class, classes, social
+education disparity: unequality, inequality, health, quality, disparity, parity, eduction, diversity, inequity, education
+economic hardship: political, cultural, moral, non-economic, hardship, socio-economical, social, societal, socio-economic, economic
+
