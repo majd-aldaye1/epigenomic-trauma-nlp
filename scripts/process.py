@@ -48,7 +48,7 @@ How to Use:
 import os
 import re
 import json
-import logging
+import logging, chardet
 import fitz  # PyMuPDF for PDF text extraction
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
@@ -64,17 +64,32 @@ download("punkt")
 download("stopwords")
 
 # Load SciSpacy's biomedical model
-nlp = spacy.load("en_core_sci_lg")
+# nlp = spacy.load("en_core_sci_lg")
+nlp = spacy.load("en_core_web_sm")
 
-# Paths and directories
-RAW_ARTICLES_DIR = "./data/papers"  # Directory with raw text or PDFs
-TOP_TERMS_FILE = "./data/top_similar_terms.json"  # Terms from fetch.py
-OUTPUT_FILE = "./data/preprocessed_articles.json"
+# Get the current directory of the script
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Load expanded terms (core + similar terms)
-with open(TOP_TERMS_FILE, "r", encoding="utf-8") as file:
-    expanded_terms = json.load(file)
+# Paths relative to the script's directory
+RAW_ARTICLES_DIR = os.path.normpath(r"C:/Users/snedm/Documents/Cornell/2024 Fall/CS 4701/cs4701/demo2/CAP_Epigenomics-Analysis_ma798_mmm443/CAP_Epigenomics-Analysis_ma798_mmm443/data/papers")
+TOP_TERMS_FILE = os.path.join(BASE_DIR, "expanded_terms.json")  # Terms from fetch.py
+OUTPUT_FILE = os.path.join(BASE_DIR, "preprocessed_articles.json")  # Adjust relative path
 
+TOP_TERMS_FILE = os.path.normpath(TOP_TERMS_FILE)
+OUTPUT_FILE = os.path.normpath(OUTPUT_FILE)
+
+print(f"RAW_ARTICLES_DIR: {RAW_ARTICLES_DIR}")
+print(f"TOP_TERMS_FILE: {TOP_TERMS_FILE}")
+print(f"OUTPUT_FILE: {OUTPUT_FILE}")
+
+# Load expanded terms (core + similar terms)s
+try:
+    with open(TOP_TERMS_FILE, "r", encoding="ascii", errors="replace") as file:
+        expanded_terms = json.load(file)
+    print("Successfully loaded expanded terms.")
+except FileNotFoundError as e:
+    print(f"Error: {e}")
+    print(f"Ensure that the file exists at: {TOP_TERMS_FILE}")
 
 def extract_text_from_pdf(pdf_path):
     """
@@ -89,9 +104,10 @@ def extract_text_from_pdf(pdf_path):
         text = ""
         for page in doc:
             text += page.get_text()
+        logging.info(f"Extracted text length for {pdf_path}: {len(text)}")
         return text.strip()
     except Exception as e:
-        logging.error(f"Error extracting text from {pdf_path}: {e}")
+        logging.error(f"Error extracting text from {pdf_path}: {e}", exc_info=True)
         return ""
 
 
@@ -158,44 +174,70 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
     processed_articles = []
     global_term_counts = {category: Counter() for category in expanded_terms.keys()}
     global_relationships = defaultdict(lambda: {"terms": Counter(), "co_occurrence_count": 0, "jaccard_similarity": 0.0})
+    MAX_NLP_LENGTH = 5000  # Limit for NLP processing
 
     for file_name in os.listdir(input_dir):
         file_path = os.path.join(input_dir, file_name)
         logging.info(f"Processing file: {file_name}")
 
-        if file_name.endswith(".pdf"):
-            raw_text = extract_text_from_pdf(file_path)
-        else:
-            with open(file_path, "r", encoding="utf-8") as file:
-                raw_text = file.read()
+        try: 
+            if file_name.endswith(".pdf"):
+                # Validate PDF
+                try:
+                    with fitz.open(file_path) as doc:
+                        pass
+                except Exception as e:
+                    logging.error(f"Invalid or corrupted PDF: {file_name} - {e}")
+                    continue
+                raw_text = extract_text_from_pdf(file_path)
+            else:
+                with open(file_path, "r", encoding="ascii", errors="replace") as file:
+                    raw_text = file.read()
 
-        if not raw_text:
+            if not raw_text.strip():
+                logging.warning(f"No extractable text found in file: {file_name}")
+                continue
+
+            # Clean, tokenize, and categorize terms
+            cleaned_text = clean_text(raw_text)
+            truncated_text = cleaned_text[:MAX_NLP_LENGTH]
+
+            # Perform NLP processing with error handling
+            try:
+                doc = nlp(truncated_text)
+            except Exception as e:
+                logging.error(f"Error during NLP processing for {file_name}: {e}")
+                continue
+
+            lemmatized_text = " ".join([token.lemma_ if token.ent_type_ == "" else token.text for token in doc])
+            term_counts = categorize_terms(lemmatized_text, expanded_terms)
+
+            # Update global term counts
+            for category, counts in term_counts.items():
+                global_term_counts[category].update(counts)
+
+            # Compute co-occurrence matrix
+            co_occurrence_matrix = compute_co_occurrence(term_counts)
+
+            # Add metadata (optional step based on text heuristics)
+            disparity_metadata = {
+                "ethnicity": next((term for term in expanded_terms["Ethnographic Terms"] if term in lemmatized_text), "Unknown"),
+                "socioeconomic_status": next((term for term in expanded_terms["Socioeconomic Terms"] if term in lemmatized_text), "Unknown"),
+            }
+
+            logging.info(f"Disparity metadata for {file_name}: {disparity_metadata}")
+
+            processed_articles.append({
+                "paper_name": file_name,
+                "cleaned_text": lemmatized_text,
+                "term_counts": term_counts,
+                "co_occurrence_matrix": co_occurrence_matrix,
+                "disparity_metadata": disparity_metadata
+            })
+
+        except Exception as e:
+            logging.error(f"Error processing file {file_name}: {e}", exc_info=True)
             continue
-
-        cleaned_text = clean_text(raw_text)
-        lemmatized_text = " ".join(lemmatize_and_process(cleaned_text))
-        term_counts = categorize_terms(lemmatized_text, expanded_terms)
-
-        # Update global term counts
-        for category, counts in term_counts.items():
-            global_term_counts[category].update(counts)
-
-        # Compute co-occurrence matrix
-        co_occurrence_matrix = compute_co_occurrence(term_counts)
-
-        # Add metadata (optional step based on text heuristics)
-        disparity_metadata = {
-            "ethnicity": next((term for term in expanded_terms["Ethnographic Terms"] if term in lemmatized_text), "Unknown"),
-            "socioeconomic_status": next((term for term in expanded_terms["Socioeconomic Terms"] if term in lemmatized_text), "Unknown"),
-        }
-
-        processed_articles.append({
-            "paper_name": file_name,
-            "cleaned_text": lemmatized_text,
-            "term_counts": term_counts,
-            "co_occurrence_matrix": co_occurrence_matrix,
-            "disparity_metadata": disparity_metadata
-        })
 
     # Calculate Jaccard similarities and global relationships
     for category1, terms1 in global_term_counts.items():
@@ -206,18 +248,28 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
                 global_relationships[(category1, category2)]["jaccard_similarity"] = intersection / union if union > 0 else 0.0
                 global_relationships[(category1, category2)]["co_occurrence_count"] += intersection
 
+    # Inline conversion of tuple keys to strings
+    def convert_tuple_keys(d):
+        """Recursively convert tuple keys to strings in a nested dictionary."""
+        if not isinstance(d, dict):
+            return d
+        return {str(k): convert_tuple_keys(v) for k, v in d.items()}
+    
+    # Convert tuple keys to strings
+    global_relationships_str_keys = convert_tuple_keys(global_relationships)
+
     # Save processed data
     with open(OUTPUT_FILE, "w") as output_file:
         json.dump({
             "papers": processed_articles,
             "global_summary": {
                 "total_term_counts": {k: dict(v) for k, v in global_term_counts.items()},
-                "top_relationships": global_relationships
+                "top_relationships": global_relationships_str_keys
             }
         }, output_file, indent=4)
 
     logging.info(f"Processed articles saved to {OUTPUT_FILE}")
-
+    return processed_articles
 
 
 if __name__ == "__main__":

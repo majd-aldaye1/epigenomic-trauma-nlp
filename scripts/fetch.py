@@ -140,7 +140,8 @@ def generate_similar_terms(term_list, model, corpus, topn=50, per_term=False):
             logging.warning(f"Skipping term '{term}': {e}")
 
     if not corpus_embeddings:
-        raise ValueError("No valid embeddings could be computed for the corpus.")
+        logging.warning("Empty or invalid corpus embeddings. Returning empty results.")
+        return {term: [] for term in term_list} if per_term else []
 
     logging.info(f"Valid corpus size: {len(valid_corpus)}")
     corpus_embeddings = np.array(corpus_embeddings)  # Ensure embeddings are NumPy arrays
@@ -148,17 +149,24 @@ def generate_similar_terms(term_list, model, corpus, topn=50, per_term=False):
     # Handle per-term similarity (individual processing)
     if per_term:
         top_similar_terms = {}
+
         for input_term in term_list:
             try:
                 input_embedding = model.encode(input_term)
                 similarities = util.cos_sim(input_embedding, corpus_embeddings).cpu().numpy()[0]
                 sorted_indices = np.argsort(similarities)[::-1]
                 top_terms = [valid_corpus[i] for i in sorted_indices[:topn]]
+
+                # Ensure core term is included
+                if input_term not in top_terms:
+                    top_terms = [input_term] + top_terms[:topn-1]  
+                
                 top_similar_terms[input_term] = top_terms
                 logging.info(f"Top terms for '{input_term}': {top_terms}")
+
             except Exception as e:
                 logging.error(f"Error processing term '{input_term}': {e}")
-                top_similar_terms[input_term] = []  # Empty list for failed terms
+                top_similar_terms[input_term] = [input_term]  
         return top_similar_terms
 
     # Handle aggregated similarity (all input terms combined)
@@ -226,32 +234,42 @@ def generate_query(mental_health_terms, epigenetic_terms, ethnographic_terms, so
 
     expanded_terms["Mental Health Terms"] = expand_terms_for_query(mental_health_terms)
     expanded_terms["Epigenetic Terms"] = expand_terms_for_query(epigenetic_terms)
-    expanded_terms["Ethnographic Terms"] = expand_terms_for_query(ethnographic_terms)
     expanded_terms["Socioeconomic Terms"] = expand_terms_for_query(socioeconomic_terms)
 
-    # Save expanded terms to a file
-    with open("expanded_terms.txt", "w", encoding="utf-8") as outf:
-        for category, terms in expanded_terms.items():
-            outf.write(f"{category}:\n")
-            outf.write(", ".join(terms) + "\n\n")
-    logging.info("Expanded terms saved to 'expanded_terms.txt'.")
+    # Maintain the nested structure for ethnographic terms
+    expanded_terms["Ethnographic Terms"] = {
+        category: expand_terms_for_query(terms, topn=10)
+        for category, terms in ethnographic_terms.items()
+    }
 
-    # Build a dynamic query using expanded term lists
-    # Logic:
+    # Save expanded terms to a file
+    with open("expanded_terms.json", "w", encoding="utf-8") as outf:
+        json.dump(expanded_terms, outf, indent=4)
+    logging.info("Expanded terms saved to 'expanded_terms.json'.")
+
+    # Flatten nested Ethnographic Terms into a single list of terms
+    ethnographic_flattened = [
+        term for category_terms in expanded_terms["Ethnographic Terms"].values()
+        for terms in category_terms.values()
+        for term in terms
+    ]
+
+    # Build a dynamic query using following logic:
     # 1. Papers must contain at least one Epigenetic Term.
     # 2. Papers must contain at least one Mental Health Term.
-    # 3. Papers must also contain at least one term from either Ethnographic Terms OR Socioeconomic Terms.
+    # 3. Must also contain at least one term from either Ethnographic OR Socioeconomic Terms.
     query = (
         f"({' OR '.join(expanded_terms['Epigenetic Terms'])}) AND "  # Epigenetic terms (required)
         f"({' OR '.join(expanded_terms['Mental Health Terms'])}) AND "  # Mental health terms (required)
-        f"({' OR '.join(expanded_terms['Ethnographic Terms'])} OR "  # Either ethnographic terms...
-        f"{' OR '.join(expanded_terms['Socioeconomic Terms'])})"  # ...or socioeconomic terms 
+        f"({' OR '.join(ethnographic_flattened)} OR "  # Flattened ethnographic terms...
+        f"{' OR '.join(expanded_terms['Socioeconomic Terms'])})"  # ...or socioeconomic terms
     )
 
     logging.info(f"Generated Query: {query}")
     return query
 
-def fetch_papers(query, scholar_pages=1, min_year=2000, output_dir="./data/testing_folder"):
+
+def fetch_papers(query, scholar_pages=1, min_year=2000, output_dir="./data/papers"):
     """
     Fetch academic papers using PyPaperBot based on the generated query.
 
@@ -278,6 +296,7 @@ def fetch_papers(query, scholar_pages=1, min_year=2000, output_dir="./data/testi
     except subprocess.CalledProcessError as e:
         logging.error(f"Error fetching papers with PyPaperBot: {e}")
 
+
 if __name__ == "__main__":
     # Core terms for querying
     mental_health_terms = [
@@ -288,27 +307,31 @@ if __name__ == "__main__":
         "methylation", "demethylation", "CpG islands", "5mC", 
         "histone modification", "H3K27me3", "epigenetic", "epigenomics",
         "BDNF", "SLC6A4", "FKBP5", "OXTR", "stress response", 
-        "HPA axis dysregulation", "adverse childhood"
+        "HPA axis dysregulation", "childhood abuse"
     ]
-    ethnographic_terms = [
-    "African", "Latino/Hispanic", "Caucasian", "Asian", "Native American", "Arab"
-    ]
+    ethnographic_terms = {
+        "African descent": [
+            "African person", "African-American person", "Black person", "Black diaspora", "African-American mother"
+        ],
+        "Latino/Hispanic descent": [
+            "Latino person", "Hispanic individual", "Latino community", "Hispanic person"
+        ],
+        "Asian descent": [
+            "Asian person", "Asian-American person", "East Asian person", "South Asian person"
+        ],
+        "Indigenous descent": [
+            "Indigenous person", "Native American person", "First Nations person", "Indigenous peoples"
+        ],
+        "Arab descent": [
+            "Arab person", "Middle-Eastern individual", "Muslim person", "Arab-American person"
+        ],
+        "European descent": [
+            "European person", "Caucasian person", "White person", "White American", "Anglo-American"
+        ]
+    }
     socioeconomic_terms = [
     "low-income", "middle-income", "high-income", "below poverty", "above poverty"
     ]
-
-    # Generate expanded terms for each category
-    expanded_terms = {
-    "Mental Health Terms": expand_terms_for_query(mental_health_terms),
-    "Epigenetic Terms": expand_terms_for_query(epigenetic_terms),
-    "Ethnographic Terms": expand_terms_for_query(ethnographic_terms),
-    "Socioeconomic Terms": expand_terms_for_query(socioeconomic_terms),
-    }
-
-    # Save expanded terms to a JSON file
-    with open("top_similar_terms.json", "w", encoding="utf-8") as file:
-        json.dump(expanded_terms, file, indent=4)
-    logging.info("Expanded terms saved to 'top_similar_terms.json'.")
 
     # Generate the query
     query = generate_query(

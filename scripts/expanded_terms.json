@@ -1,6 +1,7 @@
 {
     "Mental Health Terms": {
         "depression": [
+            "depression",
             "Depression",
             "Major depression",
             "Clinical depression",
@@ -49,10 +50,10 @@
             "Social anxiety",
             "Classification of mental disorders",
             "Emotional self-regulation",
-            "Psychological Bulletin",
-            "Serotonin"
+            "Psychological Bulletin"
         ],
         "bipolar": [
+            "bipolar",
             "Bipolar",
             "Bipolar disorder",
             "Bipolar I disorder",
@@ -101,8 +102,7 @@
             "Current Psychiatry Reports",
             "Schizoaffective disorder",
             "Bipolar nebula",
-            "Suicide",
-            "Schizotypal personality disorder"
+            "Suicide"
         ],
         "PTSD": [
             "PTSD",
@@ -157,6 +157,7 @@
             "Combat Stress"
         ],
         "anxiety": [
+            "anxiety",
             "Anxiety",
             "Anxiety disorder",
             "Depression and Anxiety",
@@ -205,10 +206,10 @@
             "Psychological stress and sleep",
             "Psychological trauma",
             "Psychoactive drug",
-            "Clinical depression",
-            "Long Depression"
+            "Clinical depression"
         ],
         "suicide": [
+            "suicide",
             "Suicide",
             "Depression",
             "Self-harm",
@@ -257,10 +258,10 @@
             "Delusional disorder",
             "Major trauma",
             "Dissociative identity disorder",
-            "Sexual dysfunction",
-            "Post-traumatic stress disorder"
+            "Sexual dysfunction"
         ],
         "generational trauma": [
+            "generational trauma",
             "Transgenerational trauma",
             "Trauma in children",
             "Psychological trauma",
@@ -309,10 +310,10 @@
             "Morbidity",
             "Injury",
             "Extreme weather post-traumatic stress disorder",
-            "Physical abuse",
-            "Sexual violence"
+            "Physical abuse"
         ],
         "chronic stress": [
+            "chronic stress",
             "Chronic stress",
             "Psychological stress",
             "Combat Stress",
@@ -361,12 +362,12 @@
             "Social anxiety",
             "Mental disorder",
             "Psychological Bulletin",
-            "Biological Psychiatry",
-            "Insomnia"
+            "Biological Psychiatry"
         ]
     },
     "Epigenetic Terms": {
         "methylation": [
+            "methylation",
             "Methylation",
             "DNA methylation",
             "Mercury methylation",
@@ -415,10 +416,10 @@
             "Adenylylation",
             "Dimethyl carbonate",
             "Histidine ammonia-lyase",
-            "Hydroxylysine",
-            "N-methylpyridinium chloride"
+            "Hydroxylysine"
         ],
         "demethylation": [
+            "demethylation",
             "Demethylation",
             "Demethylase",
             "Acylation",
@@ -467,10 +468,10 @@
             "Dioxygenase",
             "Enzyme",
             "Organic Syntheses",
-            "Nucleophilic substitution",
-            "Mercury methylation"
+            "Nucleophilic substitution"
         ],
         "CpG islands": [
+            "CpG islands",
             "CpG site",
             "PKa",
             "Food chain",
@@ -519,10 +520,10 @@
             "Grignard reagent",
             "H3K27me3",
             "Epigenomics",
-            "Anisole",
-            "Jerry March"
+            "Anisole"
         ],
         "5mC": [
+            "5mC",
             "5-methylcytosine",
             "5-Methylcytosine",
             "5-O-Methylmyricetin",
@@ -571,10 +572,10 @@
             "Methoxy",
             "Desmosine",
             "Topaquinone",
-            "Iodide",
-            "H3K27me3"
+            "Iodide"
         ],
         "histone modification": [
+            "histone modification",
             "Histone",
             "Histone methyltransferase",
             "Acetone",
@@ -587,8 +588,8 @@
             "Posttranslational modification",
             "Methylation",
             "Butyrylation",
-            "5-methylcytosine",
             "5-Methylcytosine",
+            "5-methylcytosine",
             "Protein methylation",
             "Magic methyl",
             "Methylmercury",
@@ -623,8 +624,7 @@
             "Methylmagnesium bromide",
             "Adenylylation",
             "Epigenomics",
-            "Trimethylsilyldiazomethane",
-            "Gene expression"
+            "Trimethylsilyldiazomethane"
         ],
         "H3K27me3": [
             "H3K27me3",
@@ -679,6 +679,7 @@
             "PKa"
         ],
         "epigenetic": [
+            "epigenetic",
             "Epigenetic",
             "Epigenetics",
             "Epigenomics",
@@ -692,8 +693,8 @@
             "Methylmercury",
             "Purdie methylation",
             "O-methylation",
-            "5-Methylcytosine",
             "5-methylcytosine",
+            "5-Methylcytosine",
             "Magic methyl",
             "Histone",
             "Mercury methylation",
@@ -727,10 +728,10 @@
             "Caffeoyl-CoA O-methyltransferase",
             "Enolate",
             "Nucleophile",
-            "Acetone",
-            "MiRNA"
+            "Acetone"
         ],
         "epigenomics": [
+            "epigenomics",
             "Epigenomics",
             "Epigenetic",
             "Epigenetics",
@@ -757,8 +758,8 @@
             "TmRNA",
             "Ketone",
             "Mercury methylation",
-            "5-methylcytosine",
             "5-Methylcytosine",
+            "5-methylcytosine",
             "Histone",
             "Biochemistry",
             "Methyllithium",
@@ -779,10 +780,10 @@
             "Palmitoylation",
             "Demethylase",
             "Amine",
-            "Butyrylation",
-            "Adenylylation"
+            "Butyrylation"
         ],
         "BDNF": [
+            "BDNF",
             "BrCN",
             "FKBP5",
             "Dimethylzinc",
@@ -831,10 +832,10 @@
             "Dianol",
             "5-O-Methylquercetin",
             "Redox",
-            "Arecoline",
-            "N terminus"
+            "Arecoline"
         ],
         "SLC6A4": [
+            "SLC6A4",
             "H3K27me3",
             "N6-Methyladenosine",
             "FKBP5",
@@ -883,8 +884,7 @@
             "Phosphide",
             "PKa",
             "5-methyltetrahydrofolate",
-            "Formate",
-            "DNA methyltransferase"
+            "Formate"
         ],
         "FKBP5": [
             "FKBP5",
@@ -939,6 +939,7 @@
             "Methylmercury"
         ],
         "OXTR": [
+            "OXTR",
             "Oxidize",
             "Redox",
             "Oxytocin receptor",
@@ -987,10 +988,10 @@
             "Hydroxylation",
             "Methionine",
             "Thiolate",
-            "Electrophile",
-            "BrCN"
+            "Electrophile"
         ],
         "stress response": [
+            "stress response",
             "Fight-or-flight response",
             "Testosterone",
             "Methyl triflate",
@@ -1002,8 +1003,8 @@
             "Methyl lithium",
             "Serotonin transporter",
             "Glutamate",
-            "5-Methylcytosine",
             "5-methylcytosine",
+            "5-Methylcytosine",
             "Gene expression",
             "Heavy metals",
             "Methyllithium",
@@ -1039,10 +1040,10 @@
             "Diazomethane",
             "Dianol",
             "S-adenosylmethionine",
-            "Ketone",
-            "Acetone"
+            "Ketone"
         ],
         "HPA axis dysregulation": [
+            "HPA axis dysregulation",
             "Glycophosphatidylinositol",
             "Lysine methyltransferases",
             "Protein methylation",
@@ -1091,10 +1092,12 @@
             "5-methyltetrahydrofolate",
             "Diphthamide",
             "Deamination",
-            "Proteolysis",
-            "Cholesterol"
+            "Proteolysis"
         ],
         "adverse childhood": [
+            "adverse childhood",
+            "childhood maltreatment",
+            "childhood abuse",
             "Deamidation",
             "Arsenic",
             "Heavy metals",
@@ -1143,297 +1146,12 @@
             "MethDB",
             "Methoxy",
             "Iodomethane",
-            "Porphyrin",
-            "FKBP5"
-        ]
-    },
-    "Ethnographic Terms": {
-        "African": [
-            "African",
-            "Africa",
-            "African culture",
-            "African art",
-            "African languages",
-            "African lion",
-            "African diaspora",
-            "Africanfuturism",
-            "African Union",
-            "Caucasian",
-            "African cuisine",
-            "List of ethnic groups of Africa",
-            "Demographics of Africa",
-            "African music",
-            "Caucasian race",
-            "Geography of Africa",
-            "White people",
-            "Asian",
-            "Arabs",
-            "Native Americans",
-            "Asian people",
-            "South Caucasian languages",
-            "Black Indians in the United States",
-            "North Caucasian pig",
-            "Paleo-Indians",
-            "Caucasus",
-            "Indigenous peoples in Brazil",
-            "Inuit",
-            "The Native Americans",
-            "Peoples of the Caucasus",
-            "Caucasian honey bee",
-            "Asia",
-            "Caucasian snowcock",
-            "Indigenous peoples of South America",
-            "Louisiana Creole people",
-            "Northeast Caucasian languages",
-            "Indigenous peoples in Venezuela",
-            "Caucasus hunter-gatherer",
-            "Indigenous peoples of the Americas",
-            "American Indians of Iowa",
-            "South Asia",
-            "Southeast Asia",
-            "Five Civilized Tribes",
-            "Indigenous peoples of Florida",
-            "Indigenous peoples in Peru",
-            "Iroquois",
-            "Indigenous peoples in Bolivia",
-            "Indigenous peoples in Canada",
-            "Indigenous peoples in Colombia",
-            "Native American civil rights"
-        ],
-        "Latino/Hispanic": [
-            "Caucasian",
-            "Asian",
-            "Caucasian race",
-            "Native Americans",
-            "Indigenous peoples of Mexico",
-            "African",
-            "White people",
-            "Asian people",
-            "Indigenous peoples in Ecuador",
-            "Indigenous peoples in Brazil",
-            "Indigenous peoples of California",
-            "The Native Americans",
-            "Louisiana Creole people",
-            "Indigenous peoples in Colombia",
-            "Indigenous peoples of South America",
-            "American English",
-            "Black Indians in the United States",
-            "American Indian English",
-            "Arabs",
-            "Indigenous peoples in Chile",
-            "Native Americans in the United States",
-            "Indigenous peoples of the Americas",
-            "Indigenous peoples of Costa Rica",
-            "Asian option",
-            "South Caucasian languages",
-            "Indigenous peoples in Argentina",
-            "Native American identity in the United States",
-            "Native American languages",
-            "Indigenous peoples in Venezuela",
-            "Native Hawaiians",
-            "Native American recognition in the United States",
-            "Native Americans in the American Civil War",
-            "Caucasian honey bee",
-            "Indigenous peoples in Peru",
-            "Paleo-Indians",
-            "Native American culture",
-            "Northeast Caucasian languages",
-            "Native American fashion",
-            "Cultural assimilation of Native Americans",
-            "Indigenous peoples of Florida",
-            "Indigenous peoples in Bolivia",
-            "Mississippian culture",
-            "Native American civil rights",
-            "Racism against Native Americans in the United States",
-            "Native American Party",
-            "Indigenous languages of the Americas",
-            "Native American peoples of Oregon",
-            "Asian diaspora",
-            "Caucasus",
-            "English language"
-        ],
-        "Caucasian": [
-            "Caucasian",
-            "Caucasian race",
-            "Asian",
-            "African",
-            "White people",
-            "Northeast Caucasian languages",
-            "Caucasian honey bee",
-            "Northwest Caucasian languages",
-            "North Caucasian pig",
-            "South Caucasian languages",
-            "Caucasian Shepherd Dog",
-            "Caucasus",
-            "Caucasian snowcock",
-            "Peoples of the Caucasus",
-            "Asian people",
-            "Arabs",
-            "Native Americans",
-            "Paleo-Indians",
-            "Brown Caucasian cattle",
-            "Caucasus hunter-gatherer",
-            "List of ethnic groups of Africa",
-            "Black Indians in the United States",
-            "Africa",
-            "Demographics of Africa",
-            "The Native Americans",
-            "African culture",
-            "African diaspora",
-            "Asian option",
-            "Inuit",
-            "Languages of the Caucasus",
-            "Asian diaspora",
-            "American Indians of Iowa",
-            "Asian culture",
-            "Racism in Russia",
-            "African lion",
-            "African languages",
-            "Alaska Natives",
-            "Native Hawaiians",
-            "Racism against Native Americans in the United States",
-            "Indigenous peoples of the Americas",
-            "Asia",
-            "Louisiana Creole people",
-            "Indigenous peoples of Florida",
-            "Indigenous peoples of California",
-            "Native Americans in the United States",
-            "National Association for the Advancement of Colored People",
-            "Native American Party",
-            "Cultural assimilation of Native Americans",
-            "Iroquois",
-            "African cuisine"
-        ],
-        "Asian": [
-            "Asian",
-            "Asian people",
-            "Caucasian",
-            "Asian option",
-            "Asian culture",
-            "Asia",
-            "Asian diaspora",
-            "Caucasian race",
-            "Southeast Asia",
-            "South Asia",
-            "East Asia",
-            "Asian cuisine",
-            "Arabs",
-            "African",
-            "Native Americans",
-            "White people",
-            "ASEAN",
-            "Caucasus",
-            "Peoples of the Caucasus",
-            "South Caucasian languages",
-            "Alaska Natives",
-            "The Native Americans",
-            "Native Hawaiians",
-            "Indigenous peoples of California",
-            "Caucasus hunter-gatherer",
-            "Inuit",
-            "Northeast Caucasian languages",
-            "Paleo-Indians",
-            "Africa",
-            "Black Indians in the United States",
-            "North Caucasian pig",
-            "Northwest Caucasian languages",
-            "Caucasian honey bee",
-            "Indigenous peoples of Costa Rica",
-            "Asyan",
-            "American Indian English",
-            "Caucasian snowcock",
-            "Indigenous peoples of Florida",
-            "Native American peoples of Oregon",
-            "Caucasian Shepherd Dog",
-            "American Indians of Iowa",
-            "Indigenous peoples of South America",
-            "Native Americans in the United States",
-            "English language",
-            "Native American fashion",
-            "Native American languages",
-            "Indigenous peoples of Arizona",
-            "African diaspora",
-            "List of ethnic groups of Africa",
-            "Native American Party"
-        ],
-        "Native American": [
-            "Native Americans",
-            "The Native Americans",
-            "Native Americans in the United States",
-            "Native American culture",
-            "Native American identity in the United States",
-            "Native American studies",
-            "Native American recognition in the United States",
-            "Cultural assimilation of Native Americans",
-            "Native American civil rights",
-            "Native American art",
-            "Native American Party",
-            "Native Americans in the American Civil War",
-            "Native American peoples of Oregon",
-            "American Indians of Iowa",
-            "Native American languages",
-            "Indigenous peoples of the Americas",
-            "Native American wars",
-            "List of Native Americans of the United States",
-            "Alaska Natives",
-            "Native American religions",
-            "Native American trade",
-            "Iroquois",
-            "Native American music",
-            "Black Indians in the United States",
-            "Native Americans and World War II",
-            "History of Native Americans in the United States",
-            "Native American cuisine",
-            "American Indian English",
-            "Indigenous peoples of California",
-            "Paleo-Indians",
-            "Native Hawaiians",
-            "Native American fashion",
-            "Native American tribes in Virginia",
-            "Native American people and Mormonism",
-            "Racism against Native Americans in the United States",
-            "Native American church",
-            "List of Native Americans in the United States Congress",
-            "Native American tribes in Nebraska",
-            "Modern social statistics of Native Americans",
-            "Plains Indians",
-            "Native American name controversy",
-            "Indigenous peoples of South America",
-            "Inuit",
-            "Indigenous",
-            "Native American women in politics",
-            "List of Native American artists",
-            "Indigenous peoples of Arizona",
-            "Indigenous peoples in Canada",
-            "State-recognized tribes in the United States",
-            "American Indian Movement",
-            "Native American genocide in the United States"
-        ],
-        "Arab": [
-            "Arabs",
-            "Middle-Eastern",
-            "Middle Eastern",
-            "Palestinian", 
-            "Arab-Muslim", 
-            "Arabian", 
-            "American-Arab", 
-            "Arab-American", 
-            "Muslim",
-            "Muslims",
-            "North African",
-            "South Asian",
-            "Sotuh West Asian",
-            "Peoples of the Caucasus",
-            "Caucasus",
-            "Asian people",
-            "African diaspora",
-            "Asian diaspora",
-            "Caucasian race",
-            "East Asia"
+            "Porphyrin"
         ]
     },
     "Socioeconomic Terms": {
         "low-income": [
+            "low-income",
             "Poverty",
             "Concentrated poverty",
             "Working poor",
@@ -1470,8 +1188,8 @@
             "Human Poverty Index",
             "Poverty in Europe",
             "Absolute poverty",
-            "Disability and Poverty",
             "Disability and poverty",
+            "Disability and Poverty",
             "Poverty in Northern America",
             "Theories of poverty",
             "Poverty in the Comoros",
@@ -1482,10 +1200,10 @@
             "Poverty in the European Economic Area",
             "Cycle of poverty",
             "Poverty in Africa",
-            "Welfare",
-            "Poverty in Hispanic America"
+            "Welfare"
         ],
         "middle-income": [
+            "middle-income",
             "American middle class",
             "Middle class",
             "Basic income",
@@ -1534,10 +1252,10 @@
             "Poverty in North America",
             "Poverty alleviation",
             "African-American upper class",
-            "Cycle of poverty",
-            "Global poverty"
+            "Cycle of poverty"
         ],
         "high-income": [
+            "high-income",
             "Income disparity",
             "World Bank high-income economy",
             "Prosperity",
@@ -1586,10 +1304,10 @@
             "Poverty in North America",
             "African-American middle class",
             "Socioeconomic mobility in the United States",
-            "Child poverty",
-            "Human Poverty Index"
+            "Child poverty"
         ],
         "below poverty": [
+            "below poverty",
             "Poverty",
             "Relative poverty",
             "Concentrated poverty",
@@ -1638,10 +1356,10 @@
             "Poverty in the European Union",
             "Poverty in Senegal",
             "Poverty in Italy",
-            "Poverty in Malaysia",
-            "Poverty in Haiti"
+            "Poverty in Malaysia"
         ],
         "above poverty": [
+            "above poverty",
             "Poverty",
             "Concentrated poverty",
             "Extreme poverty",
@@ -1690,8 +1408,329 @@
             "Poverty in Malaysia",
             "Poverty in Brazil",
             "Poverty in Latin America",
-            "Poverty in Ascension Island",
-            "Poverty in Monaco"
+            "Poverty in Ascension Island"
         ]
+    },
+    "Ethnographic Terms": {
+        "African descent": {
+            "African person": [
+                "African person",
+                "African American",
+                "African Australian",
+                "West African people",
+                "Afro-Arab",
+                "Afro-Latino",
+                "Afro-Latina",
+                "Indigenous peoples of Africa",
+                "African Americans",
+                "African Indonesians",
+                "African Australians"
+            ],
+            "African-American person": [
+                "African-American person",
+                "African American",
+                "African Americans",
+                "African-American history",
+                "African-American English",
+                "Afro-Arab",
+                "African Australian",
+                "African-American culture"
+            ],
+            "Black person": [
+                "Black person",
+                "Black people",
+                "African American",
+                "Blacks",
+                "Person of color",
+                "Black",
+                "Negroid",
+                "Black British",
+                "African Americans"
+            ],
+            "Black diaspora": [
+                "Black diaspora",
+                "African diaspora",
+                "African diaspora in the Americas",
+                "Blacks",
+                "Black Loyalists",
+                "Lists of black people",
+                "Afro-Latin Americans",
+                "Black people"
+            ],
+            "African-American mother": [
+                "African-American mother",
+                "African American",
+                "African Americans",
+                "African-American history",
+                "African-American culture",
+                "African-American English",
+                "Afro-Latin American",
+                "African-American art",
+                "Afro-Arab",
+                "Black women"
+            ]
+        },
+        "Latino/Hispanic descent": {
+            "Latino person": [
+                "Latino person",
+                "Hispanic American",
+                "Hispanic",
+                "Latinos",
+                "Hispanics",
+                "Mexican American",
+                "Hispanic and Latino",
+                "Hispanic America",
+                "Latino studies",
+                "Hispanic and Latino Americans"
+            ],
+            "Hispanic individual": [
+                "Hispanic individual",
+                "Hispanic",
+                "Hispanic American",
+                "Hispanics",
+                "Hispanic America",
+                "Hispanic and Latino",
+                "Hispanic and Latino Americans",
+                "Non-Hispanic whites",
+                "Latinos",
+                "Hispanic culture"
+            ],
+            "Latino community": [
+                "Latino community",
+                "Latino Cultural Center",
+                "Latinos",
+                "Hispanics and Latinos in Los Angeles",
+                "Hispanic America",
+                "Hispanic",
+                "Hispanic and Latino",
+                "Latino studies",
+                "Latino vote",
+                "Hispanic American"
+            ],
+            "Hispanic person": [
+                "Hispanic person",
+                "Hispanic",
+                "Hispanic American",
+                "Hispanics",
+                "Hispanic America",
+                "Hispanic and Latino",
+                "Hispanic culture",
+                "Spanish people",
+                "Latinos",
+                "Hispanic and Latino Americans"
+            ]
+        },
+        "Asian descent": {
+            "Asian person": [
+                "Asian person",
+                "Asian people",
+                "Asians",
+                "Asian Americans",
+                "East Asian people",
+                "British Asian",
+                "South Asian",
+                "Asian Pacific American",
+                "Southeast Asian Americans",
+                "East Asian Americans"
+            ],
+            "Asian-American person": [
+                "Asian-American person",
+                "Asian Americans",
+                "East Asian Americans",
+                "Asian Pacific American",
+                "Southeast Asian Americans",
+                "Asian people",
+                "South Asian Americans",
+                "Asian Latin Americans",
+                "Asian Americans in California",
+                "Asians"
+            ],
+            "East Asian person": [
+                "East Asian person",
+                "East Asian people",
+                "East Asians",
+                "East Asian Americans",
+                "West Asians",
+                "East Asia",
+                "South Asian",
+                "Asian people",
+                "East Asian cultural sphere",
+                "Southeast Asian Americans"
+            ],
+            "South Asian person": [
+                "South Asian person",
+                "South Asian",
+                "South Asian Americans",
+                "South Asian diaspora",
+                "South Asian ethnic groups",
+                "Chinese South Africans",
+                "South Asia",
+                "Southeast Asian Americans",
+                "South Asians in the United Kingdom",
+                "Asian people"
+            ]
+        },
+        "Indigenous descent": {
+            "Indigenous person": [
+                "Indigenous person",
+                "Indigenous peoples",
+                "Indigenous peoples of the Americas",
+                "Indigenous peoples of Africa",
+                "Indigenous studies",
+                "List of Indigenous peoples",
+                "List of indigenous peoples",
+                "Indigenous Australians",
+                "Indigenous language",
+                "Indigenous peoples in Canada"
+            ],
+            "Native American person": [
+                "Native American person",
+                "Native Americans in the United States",
+                "Indigenous peoples",
+                "Indigenous peoples of the Americas",
+                "Native American studies",
+                "Indigenous peoples of North America",
+                "Native American self-determination",
+                "Native American name controversy",
+                "Indigenous peoples of South America",
+                "Tribe"
+            ],
+            "First Nations person": [
+                "First Nations person",
+                "First nations",
+                "List of First Nations peoples",
+                "First peoples",
+                "First Nations in Canada",
+                "Assembly of First Nations",
+                "United Nations",
+                "Indigenous peoples of Africa",
+                "Indigenous peoples",
+                "Christopher Columbus"
+            ],
+            "Indigenous peoples": [
+                "Indigenous peoples",
+                "Indigenous peoples of the Americas",
+                "Indigenous peoples of Africa",
+                "List of Indigenous peoples",
+                "List of indigenous peoples",
+                "Indigenous peoples of North America",
+                "Indigenous peoples of Eurasia",
+                "Indigenous peoples in Canada",
+                "Indigenous studies",
+                "Working Group on Indigenous Populations"
+            ]
+        },
+        "Arab descent": {
+            "Arab person": [
+                "Arab person",
+                "Arab",
+                "Arab people",
+                "Arab Muslims",
+                "Arab identity",
+                "Arab Americans",
+                "Arabah",
+                "Arabs",
+                "Arab Jews",
+                "Afro-Arab"
+            ],
+            "Middle-Eastern individual": [
+                "Middle-Eastern individual",
+                "Middle East",
+                "Arab",
+                "Arab people",
+                "Arab Americans",
+                "Arabs",
+                "Arab Muslims",
+                "Iranian Arabs",
+                "Arabs in Turkey",
+                "Young Arab Society"
+            ],
+            "Muslim person": [
+                "Muslim person",
+                "Muslims",
+                "Arab Muslims",
+                "Islam",
+                "Muhammad",
+                "Allah",
+                "Muslim world",
+                "Arab",
+                "Arab people",
+                "Non-denominational Muslims"
+            ],
+            "Arab-American person": [
+                "Arab-American person",
+                "Arab Americans",
+                "Arab",
+                "Arab people",
+                "Arab Canadians",
+                "Arab identity",
+                "Arab Australians",
+                "Arab Muslims",
+                "Afro-Arab",
+                "Arab culture"
+            ]
+        },
+        "European descent": {
+            "European person": [
+                "European person",
+                "European Americans",
+                "Europeans",
+                "Nationality",
+                "European ethnic groups",
+                "European Moroccans",
+                "Bulgarian people",
+                "Basque people",
+                "European language",
+                "European diaspora"
+            ],
+            "Caucasian person": [
+                "Caucasian person",
+                "Caucasian race",
+                "White ethnic",
+                "White Africans of European ancestry",
+                "White people",
+                "Ethnicity",
+                "Multiracial",
+                "African people",
+                "The History of White People",
+                "White South Africans"
+            ],
+            "White person": [
+                "White person",
+                "White people",
+                "White ethnic",
+                "Acting white",
+                "Caucasian race",
+                "Poor White",
+                "White British",
+                "Angry white male",
+                "White identity",
+                "White Costa Rican"
+            ],
+            "White American": [
+                "White American",
+                "White Americans",
+                "White Latin American",
+                "White ethnic",
+                "White Latin Americans",
+                "White British",
+                "European Americans",
+                "White Costa Rican",
+                "White Colombian",
+                "White Americans in California"
+            ],
+            "Anglo-American": [
+                "Anglo-American",
+                "Anglo-Americans",
+                "British America",
+                "Anglo-Celtic",
+                "European Americans",
+                "Spanish Americans",
+                "German Americans",
+                "White British",
+                "White Americans",
+                "British Asian"
+            ]
+        }
     }
 }
