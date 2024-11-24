@@ -1,6 +1,6 @@
 from rapidfuzz import fuzz
 import logging
-from fetch import fetch_wikipedia_corpus, generate_similar_terms
+from scripts.paper_fetch import fetch_wikipedia_corpus, generate_similar_terms
 
 from sentence_transformers import SentenceTransformer
 

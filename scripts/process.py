@@ -92,7 +92,7 @@ try:
 except FileNotFoundError as e:
     print(f"Error: {e}")
     print(f"Ensure that the file exists at: {TOP_TERMS_FILE}")
-f = open('removed.txt', 'w')
+f = open('./data/removed.txt', 'w')
 def extract_text_from_pdf(pdf_path):
     """
     Extract text from PDF files.
@@ -127,8 +127,14 @@ def clean_text(text):
     # Remove patterns like '[#]'
     text = re.sub(r"\[\d+\]", "", text)
 
+    # Remove all mentions of DOI, pubmed, and any common paper section titles
+    text = re.sub(r"(DOI|pubmed|review|abstract|keywords|review|download|reference|acknowledge)", "", text, flags=re.I)
+
     # Remove standalone numbers
     text = re.sub(r"\b\d+\b", "", text)
+    
+    # Remove standalone letters
+    text = re.sub(r"\b\w\w\b", "", text)
 
     # Remove standalone letters
     text = re.sub(r"\b\w\b", "", text)
@@ -163,7 +169,7 @@ def lemmatize_and_process(doc):
     for token in doc:
         if token.tag_ in tags_to_remove or token.ent_type_ in ents_to_remove or token.text.lower() in stopwords.words("English"):
             # Print out removed tokens for debugging
-            print(token.text,token.tag_, file = f)
+            print(token.text,token.tag_, token.ent_type_, file = f)
         elif token.ent_type_ == "" and token.tag_ not in tags_to_remove:
             cleaned_text.append(token.lemma_)
         elif token.ent_type_ not in ents_to_remove and token.tag_ not in tags_to_remove:
@@ -187,7 +193,6 @@ def categorize_terms(text, expanded_terms):
         term_counts[category] = Counter(t for t in tokens if t in terms)
     return term_counts
 
-
 def compute_co_occurrence(term_counts):
     """Compute a co-occurrence matrix for terms across categories."""
     co_occurrence_matrix = defaultdict(lambda: defaultdict(int))
@@ -200,9 +205,23 @@ def compute_co_occurrence(term_counts):
     return co_occurrence_matrix
 
 
+def extract_norp_entities(doc):
+    """
+    Extract NORP entities from the processed text using NER.
+    
+    Args:
+        doc (spacy.tokens.Doc): A processed SpaCy Doc object.
+        
+    Returns:
+        list: List of NORP entities found in the text.
+    """
+    norp_entities = [ent.text for ent in doc.ents if ent.label_ == "NORP"]
+    return norp_entities
+
+
 def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_terms):
     """
-    Process raw articles (text or PDFs) to clean, categorize, and calculate statistics.
+    Process raw articles (PDFs only) to clean, categorize, and calculate statistics.
     Args:
         input_dir (str): Directory containing raw articles.
         expanded_terms (dict): Dictionary with core terms and expanded similar terms.
@@ -212,25 +231,29 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
     processed_articles = []
     global_term_counts = {category: Counter() for category in expanded_terms.keys()}
     global_relationships = defaultdict(lambda: {"terms": Counter(), "co_occurrence_count": 0, "jaccard_similarity": 0.0})
-    MAX_NLP_LENGTH = 5000  # Limit for NLP processing
+    MAX_NLP_LENGTH = 50000  # Limit for NLP processing
 
     for file_name in os.listdir(input_dir):
         file_path = os.path.join(input_dir, file_name)
+        
+        # Process only PDF files
+        if not file_name.endswith(".pdf"):
+            logging.info(f"Skipping non-PDF file: {file_name}")
+            continue
+
         logging.info(f"Processing file: {file_name}")
 
         try: 
-            if file_name.endswith(".pdf"):
-                # Validate PDF
-                try:
-                    with fitz.open(file_path) as doc:
-                        pass
-                except Exception as e:
-                    logging.error(f"Invalid or corrupted PDF: {file_name} - {e}")
-                    continue
-                raw_text = extract_text_from_pdf(file_path)
-            else:
-                with open(file_path, "r", encoding="ascii", errors="replace") as file:
-                    raw_text = file.read()
+            # Validate PDF
+            try:
+                with fitz.open(file_path) as doc:
+                    pass
+            except Exception as e:
+                logging.error(f"Invalid or corrupted PDF: {file_name} - {e}")
+                continue
+
+            # Extract text from the PDF
+            raw_text = extract_text_from_pdf(file_path)
 
             if not raw_text.strip():
                 logging.warning(f"No extractable text found in file: {file_name}")
@@ -248,7 +271,13 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
                 continue
         
             lemmatized_text = " ".join(lemmatize_and_process(doc))
+            
+            # Extract NORP entities
+            norp_entities = extract_norp_entities(doc)
+
+            # Categorize terms (include NORP entities under Ethnographic Terms)
             term_counts = categorize_terms(lemmatized_text, expanded_terms)
+            term_counts["Ethnographic Terms"].update(norp_entities)
 
             # Update global term counts
             for category, counts in term_counts.items():
@@ -308,6 +337,8 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
 
     logging.info(f"Processed articles saved to {OUTPUT_FILE}")
     return processed_articles
+
+
 
 
 if __name__ == "__main__":
