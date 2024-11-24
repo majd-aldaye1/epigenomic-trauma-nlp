@@ -73,7 +73,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # Paths relative to the script's directory
 # RAW_ARTICLES_DIR = os.path.normpath(r"C:/Users/snedm/Documents/Cornell/2024 Fall/CS 4701/cs4701/demo2/CAP_Epigenomics-Analysis_ma798_mmm443/CAP_Epigenomics-Analysis_ma798_mmm443/data/papers")
 # # Path for Majd
-RAW_ARTICLES_DIR = os.path.normpath(r"./data/testing_folder")
+RAW_ARTICLES_DIR = os.path.normpath(r"./data/papers")
 TOP_TERMS_FILE = os.path.join(BASE_DIR, "expanded_terms.json")  # Terms from fetch.py
 OUTPUT_FILE = os.path.join(BASE_DIR, "preprocessed_articles.json")  # Adjust relative path
 

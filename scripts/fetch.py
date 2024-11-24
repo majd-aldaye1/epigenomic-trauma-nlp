@@ -74,7 +74,7 @@ def generate_query(path_to_file):
     return query
 
 
-def fetch_papers(query, scholar_pages=1, min_year=2000, output_dir="./data/papers"):
+def fetch_papers(query, scholar_pages=10, min_year=2000, output_dir="./data/papers"):
     """
     Fetch academic papers using PyPaperBot based on the generated query.
 
