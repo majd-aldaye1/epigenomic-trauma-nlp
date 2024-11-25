@@ -51,19 +51,19 @@ def generate_query(path_to_file, repetitions=1, min_terms=5):
     socioeconomic_query = ' OR '.join([term for term in expanded_terms["socioeconomic terms"] if len(term.split())<=2])
 
     ethnographics = [
-        'arab', 'american', 'latino', 'native', 'indigenous', 'african', 'asian',
-        'european', 'australian', 'muslim', 'jewish', 'hispanic', 'black', 'white',
+        'arab', 'american', 'latino', 'indigenous', 'african', 'asian',
+        'european', 'australian', 'muslim', 'jewish', 'hispanic',
         ]
     
     # Generate all pairwise combinations within the chunk
     ethnographic_combinations = [
-            f"({pair[0]} AND {pair[1]})" for pair in combinations(ethnographics, 2)
+            f"({triple[0]} AND {triple[1]} AND {triple[2]})" for triple in combinations(ethnographics, 3)
         ]
     
     ethnographic_query = f"({' OR '.join(ethnographic_combinations)})"
 
     # Combine all subqueries into the final query
-    query = f"({epigenetic_query}) AND ({mental_health_query}) AND ({ethnographic_query}) AND ({socioeconomic_query})"
+    query = f"({mental_health_query}) AND ({ethnographic_query}) AND ({socioeconomic_query}) AND (epigenetic)"
 
     with open('query.txt', 'w') as f:
         print(query, file=f)
@@ -72,7 +72,7 @@ def generate_query(path_to_file, repetitions=1, min_terms=5):
     return query
 
 
-def fetch_papers(query, scholar_pages=15, min_year=1900, sort_by_relevance=True, output_dir="./data/papers"):
+def fetch_papers(query, scholar_pages=100, min_year=1900, num_papers=10, output_dir="./data/papers"):
     """
     Fetch academic papers using PyPaperBot based on the generated query.
 
@@ -95,6 +95,7 @@ def fetch_papers(query, scholar_pages=15, min_year=1900, sort_by_relevance=True,
         f"--scholar-pages={scholar_pages}",
         f"--min-year={min_year}",
         f"--dwn-dir={output_dir}",
+        f"--max-dwn-year={num_papers}"
     ]
 
     try:
@@ -111,4 +112,4 @@ if __name__ == "__main__":
     query = generate_query(path_to_file)
 
     # Fetch papers using the generated query, sorted by relevance
-    fetch_papers(query, scholar_pages=15, min_year=2000, sort_by_relevance=True)
+    fetch_papers(query, scholar_pages=30, min_year=1900, num_papers=300)

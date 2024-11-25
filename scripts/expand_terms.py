@@ -159,15 +159,16 @@ def generate_similar_terms(term_list, model, corpus, topn=50, per_term=False, mo
         top_similar_terms = [
             valid_corpus[i].lower()
             for i in sorted_indices[:topn]
-            if all(j not in term_list for j in valid_corpus[i].lower().split())  # Corrected
+            if len(set(valid_corpus[i].lower().split()).intersection(set([term for phrase in term_list for term in phrase.split()]))) == 0 # Corrected
             and len(valid_corpus[i].split()) <= 3
             and "and" not in valid_corpus[i].lower()
             and "or" not in valid_corpus[i].lower()
+            and "in" not in valid_corpus[i].lower()
         ]
         logging.info(f"Top {topn} similar terms: {top_similar_terms}")
         return top_similar_terms
     
-def expand_terms_for_query(terms, max_depth=1, topn=50, per_term = False):
+def expand_terms_for_query(terms, max_depth=2, topn=100, per_term = False):
     """
     Expand input terms using Wikipedia and semantic similarity.
 
@@ -180,7 +181,7 @@ def expand_terms_for_query(terms, max_depth=1, topn=50, per_term = False):
         list: Expanded list of terms.
     """
     logging.info(f"Expanding terms for: {terms}")
-    corpus = fetch_wikipedia_corpus(terms, max_depth=max_depth, max_pages=200)
+    corpus = fetch_wikipedia_corpus(terms, max_depth=max_depth, max_pages=400)
     if not corpus:
         logging.warning(f"The fetched corpus is empty for terms: {terms}.")
         return {term: [] for term in terms}  # Return an empty dictionary for each term
@@ -203,22 +204,22 @@ def expand_and_save_to_json(mental_health_terms, epigenetic_terms, ethnographic_
 
     # Expand Mental Health and Epigenetic terms with core term as keys
     expanded_terms["mental health terms"] = [
-            expanded.lower() for expanded in expand_terms_for_query(mental_health_terms, topn=100,per_term=False)
+            expanded.lower() for expanded in expand_terms_for_query(mental_health_terms, topn=200,per_term=False)
         ]
 
     expanded_terms["epigenetic terms"] = [
-            expanded.lower() for expanded in expand_terms_for_query(epigenetic_terms, topn=100,per_term=False)
+            expanded.lower() for expanded in expand_terms_for_query(epigenetic_terms, topn=200,per_term=False)
         ]
 
     # Expand Socioeconomic Terms with core term as keys
     expanded_terms["socioeconomic terms"] = [
-            expanded.lower() for expanded in expand_terms_for_query(socioeconomic_terms, topn=100, per_term=False)
+            expanded.lower() for expanded in expand_terms_for_query(socioeconomic_terms, topn=200, per_term=False)
         ]
 
     # Maintain the nested structure for ethnographic terms and normalize to lowercase
     expanded_terms["ethnographic terms"] = {
         category.lower(): [
-            term.lower() for term in expand_terms_for_query(terms, topn=50, per_term=False)
+            term.lower() for term in expand_terms_for_query(terms, topn=200, per_term=False)
         ]
         for category, terms in ethnographic_terms.items()
     }
@@ -242,23 +243,23 @@ if __name__ == "__main__":
         "HPA axis dysregulation", "childhood abuse"
     ]
     ethnographic_terms = {
-        "African descent": [
-            "African ethnicity", "African person", "African-American person", "Black person", "Black diaspora", "African-American mother"
+        "african descent": [
+            "african ethnicity", "african person", "african-american person", "black person", "black diaspora", "african-american mother"
         ],
-        "Latino/Hispanic descent": [
-            "Latino person", "Hispanic individual", "Latino community", "Hispanic person", "hispanic ethnicity"
+        "latino/hispanic descent": [
+            "latino person", "hispanic individual", "hispanic person", "hispanic ethnicity"
         ],
-        "Asian descent": [
-            "Asian person", "Asian-American person", "East Asian person", "South Asian person", "asian ethnicity"
+        "asian descent": [
+            "asian person", "asian-American person", "east asian person", "south asian person", "asian ethnicity"
         ],
-        "Indigenous descent": [
-            "Indigenous person", "Native American person", "First Nations person", "Indigenous peoples", "indigenous ethnicity"
+        "indigenous descent": [
+            "indigenous person", "native american person", "first nations person", "indigenous peoples", "indigenous ethnicity"
         ],
-        "Arab descent": [
-            "Arab person", "Middle-Eastern individual", "Muslim person", "Arab-American person", "Arab ethnicity"
+        "arab descent": [
+            "arab person", "middle-eastern individual", "muslim person", "arab-american person", "arab ethnicity"
         ],
-        "European descent": [
-            "European person", "Caucasian person", "White person", "White American", "Anglo-American", "European ethnicity"
+        "european descent": [
+            "european person", "caucasian person", "white person", "white american", "anglo-american", "european ethnicity"
         ]
     }
     socioeconomic_terms = [

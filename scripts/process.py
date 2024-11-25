@@ -28,12 +28,12 @@ Outputs:
           "paper_name": "example.pdf",
           "cleaned_text": "processed text here",
           "term_counts": {
-              "Mental Health Terms": {"depression": 5, "anxiety": 3, ...},
-              "Epigenetic Terms": {"methylation": 4, ...},
+              "mental health terms": {"depression": 5, "anxiety": 3, ...},
+              "epigenetic terms": {"methylation": 4, ...},
               ...
           },
           "jaccard_similarity": {
-              "('Mental Health Terms', 'Epigenetic Terms')": 0.5,
+              "('mental health terms', 'epigenetic terms')": 0.5,
               ...
           }
       },
@@ -65,20 +65,15 @@ download("stopwords")
 
 # Load SciSpacy's biomedical model
 # nlp = spacy.load("en_core_sci_lg")
-nlp = spacy.load("en_core_web_lg")
+nlp = spacy.load("en_core_web_trf")
 
-# Get the current directory of the script
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Paths relative to the script's directory
 # RAW_ARTICLES_DIR = os.path.normpath(r"C:/Users/snedm/Documents/Cornell/2024 Fall/CS 4701/cs4701/demo2/CAP_Epigenomics-Analysis_ma798_mmm443/CAP_Epigenomics-Analysis_ma798_mmm443/data/papers")
 # # Path for Majd
-RAW_ARTICLES_DIR = os.path.normpath(r"./data/papers")
-TOP_TERMS_FILE = os.path.join(BASE_DIR, "expanded_terms.json")  # Terms from fetch.py
-OUTPUT_FILE = os.path.join(BASE_DIR, "preprocessed_articles.json")  # Adjust relative path
-
-TOP_TERMS_FILE = os.path.normpath(TOP_TERMS_FILE)
-OUTPUT_FILE = os.path.normpath(OUTPUT_FILE)
+RAW_ARTICLES_DIR = "./data/papers"
+OUTPUT_FILE = "./scripts/preprocessed_articles.json"  # Adjust relative path
+TOP_TERMS_FILE = './expanded_terms.json'
 
 print(f"RAW_ARTICLES_DIR: {RAW_ARTICLES_DIR}")
 print(f"TOP_TERMS_FILE: {TOP_TERMS_FILE}")
@@ -174,6 +169,8 @@ def lemmatize_and_process(doc):
             cleaned_text.append(token.lemma_)
         elif token.ent_type_ not in ents_to_remove and token.tag_ not in tags_to_remove:
             cleaned_text.append(token.text)
+        if token.ent_type_ == 'LAW':
+            print('LAWWWWWW', token.text, file=f)
 
     return cleaned_text
 
@@ -275,9 +272,9 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
             # Extract NORP entities
             norp_entities = extract_norp_entities(doc)
 
-            # Categorize terms (include NORP entities under Ethnographic Terms)
+            # Categorize terms (include NORP entities under ethnographic terms)
             term_counts = categorize_terms(lemmatized_text, expanded_terms)
-            term_counts["Ethnographic Terms"].update(norp_entities)
+            term_counts["ethnographic terms"].update(norp_entities)
 
             # Update global term counts
             for category, counts in term_counts.items():
@@ -288,8 +285,8 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
 
             # Add metadata (optional step based on text heuristics)
             disparity_metadata = {
-                "ethnicity": next((term for term in expanded_terms["Ethnographic Terms"] if term in lemmatized_text), "Unknown"),
-                "socioeconomic_status": next((term for term in expanded_terms["Socioeconomic Terms"] if term in lemmatized_text), "Unknown"),
+                "ethnicity": next((term for term in expanded_terms["ethnographic terms"] if term in lemmatized_text), "Unknown"),
+                "socioeconomic_status": next((term for term in expanded_terms["socioeconomic terms"] if term in lemmatized_text), "Unknown"),
             }
 
             logging.info(f"Disparity metadata for {file_name}: {disparity_metadata}")
