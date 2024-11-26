@@ -1,3 +1,24 @@
+"""
+This script generates and executes a search query for academic papers using predefined categories (e.g., mental health, epigenetics, ethnicity, socioeconomic status) and expanded terms.
+
+Key Features:
+1. **Query Generation**:
+   - Dynamically builds a query string using terms from expanded categories.
+   - Ensures a minimum number of terms per category.
+   - Includes pairwise combinations of ethnographic terms to identify diverse associations.
+
+2. **Paper Fetching**:
+   - Executes the generated query using PyPaperBot to scrape academic papers from Google Scholar.
+   - Allows customization of search parameters, including the number of pages, year range, and maximum papers to fetch.
+
+3. **Output**:
+   - Saves the query string to `query.txt` for review.
+   - Downloads the resulting papers to a specified directory for further analysis.
+
+Applications:
+This script is designed for researchers conducting meta-analyses, enabling efficient retrieval of papers discussing the relationships between social trauma, epigenetics, and health disparities.
+"""
+
 import numpy as np
 import logging, random
 import subprocess
@@ -63,7 +84,7 @@ def generate_query(path_to_file, repetitions=1, min_terms=5):
     ethnographic_query = f"({' OR '.join(ethnographic_combinations)})"
 
     # Combine all subqueries into the final query
-    query = f"({mental_health_query}) AND ({ethnographic_query}) AND ({socioeconomic_query}) AND (epigenetic)"
+    query = f"({mental_health_query}) AND ({ethnographic_query}) AND ({socioeconomic_query}) AND (epigenetic) AND (methylation or demethylation)"
 
     with open('query.txt', 'w') as f:
         print(query, file=f)
@@ -112,4 +133,4 @@ if __name__ == "__main__":
     query = generate_query(path_to_file)
 
     # Fetch papers using the generated query, sorted by relevance
-    fetch_papers(query, scholar_pages=30, min_year=1900, num_papers=300)
+    fetch_papers(query, scholar_pages=10, min_year=1900, num_papers=100)

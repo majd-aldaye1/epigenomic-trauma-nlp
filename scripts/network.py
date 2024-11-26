@@ -1,3 +1,31 @@
+"""
+This script generates a network graph to visualize the co-occurrences of terms
+across mental health, epigenetic, and socioeconomic categories. 
+It processes preprocessed data from academic articles to identify relationships 
+between terms and represents them as a graph.
+
+Features:
+1. **Nodes and Edges**:
+   - Nodes represent individual terms categorized as Mental Health, Epigenetic, or Socioeconomic.
+   - Edges represent co-occurrences of terms within the same academic paper, with weights indicating the frequency of co-occurrence.
+
+2. **Graph Visualization**:
+   - Uses `networkx` and `matplotlib` to create a visually clear network graph.
+   - Node colors are based on categories, and edge thickness corresponds to co-occurrence weights.
+   - A legend provides clarity on the categories.
+
+3. **Interactive Analysis**:
+   - Reveals connections and clustering of terms, highlighting terms frequently discussed together across categories.
+
+Note:
+This script is still under development and not fully refined because of issues related to fetching data.
+
+Applications:
+Once complete, this tool will help researchers and analysts identify key 
+relationships and clusters among terms, providing insights into the interplay 
+between mental health, epigenetics, and socioeconomic factors.
+"""
+
 import json
 import networkx as nx
 import matplotlib.pyplot as plt

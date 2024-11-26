@@ -1,3 +1,21 @@
+"""
+This script expands predefined terms across categories like mental health, epigenetics, ethnicity, and socioeconomic status using Wikipedia and NLP techniques.
+
+Key Features:
+1. **Term Expansion**:
+   - Fetches related terms from Wikipedia and computes semantic similarities using the SentenceTransformer model.
+   - Filters and processes terms to ensure relevance and uniqueness.
+
+2. **Categorization**:
+   - Expands and organizes terms for predefined categories: mental health, epigenetics, socioeconomic status, and ethnicity.
+
+3. **Output**:
+   - Saves expanded terms to `expanded_terms.json` for downstream analysis.
+
+Applications:
+Useful for meta-analysis, text mining, and exploring relationships between social trauma, epigenetics, and mental health.
+"""
+
 import wikipediaapi
 from sentence_transformers import SentenceTransformer, util
 import numpy as np

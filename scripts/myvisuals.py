@@ -1,3 +1,27 @@
+"""
+This script creates a set of interactive and static visualizations to analyze relationships between socioeconomic, mental health, and epigenetic terms using data preprocessed from biomedical literature.
+
+Key Features:
+1. **Data Aggregation**:
+   - Extracts term frequencies for mental health, epigenetics, socioeconomic, and ethnicity categories from a preprocessed JSON file.
+
+2. **Heatmaps**:
+   - Generates heatmaps visualizing correlations between:
+     - Socioeconomic and epigenetic terms.
+     - Ethnicity and epigenetic terms.
+     - Mental health and epigenetic terms.
+
+3. **3D Scatter Plot**:
+   - Creates a simplified 3D scatter plot to visualize the strongest term associations across mental health, epigenetic, and socioeconomic categories.
+
+4. **Interactive Dashboard**:
+   - Combines all visualizations into an interactive web dashboard using Dash.
+   - Provides insights into the epigenomic impact of social trauma across different dimensions.
+
+Applications:
+This tool supports the meta-analysis project by offering a visual narrative of term relationships, making it easier to identify patterns and insights in the data.
+"""
+
 import json
 from collections import defaultdict
 import pandas as pd
