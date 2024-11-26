@@ -6,6 +6,7 @@ from scripts.expand_terms import (
     generate_similar_terms,
     expand_and_save_to_json
 )
+
 import json
 import numpy as np
 
@@ -73,7 +74,7 @@ class TestExpandTerms(unittest.TestCase):
         Test the entire pipeline of expanding terms and saving to a JSON file.
         """
         # Mock the output of expand_terms_for_query
-        mock_expand_terms_for_query.side_effect = lambda term, **kwargs: {term[0]: ["related_term1", "related_term2"]}
+        mock_expand_terms_for_query.side_effect = lambda term, **kwargs: [term, "related_term1", "related_term2"]
 
         # Call the function
         expand_and_save_to_json(
@@ -93,19 +94,19 @@ class TestExpandTerms(unittest.TestCase):
         # Assertions to validate the structure and content of the JSON
         self.assertIn("mental health terms", data)
         self.assertIn("mental health", data["mental health terms"])
-        self.assertEqual(data["mental health terms"]["mental health"], ["related_term1", "related_term2"])
+        self.assertEqual(data["mental health terms"], ["related_term1", "related_term2"])
 
         self.assertIn("epigenetic terms", data)
         self.assertIn("dna methylation", data["epigenetic terms"])
-        self.assertEqual(data["epigenetic terms"]["dna methylation"], ["related_term1", "related_term2"])
+        self.assertEqual(data["epigenetic terms"], ["related_term1", "related_term2"])
 
         self.assertIn("socioeconomic terms", data)
         self.assertIn("low-income", data["socioeconomic terms"])
-        self.assertEqual(data["socioeconomic terms"]["low-income"], ["related_term1", "related_term2"])
+        self.assertEqual(data["socioeconomic terms"], ["related_term1", "related_term2"])
 
         self.assertIn("ethnographic terms", data)
         self.assertIn("african descent", data["ethnographic terms"])
-        self.assertEqual(data["ethnographic terms"]["african descent"], ["black person"])
+        self.assertEqual(data["ethnographic terms"], ["black person"])
 
 
 if __name__ == "__main__":

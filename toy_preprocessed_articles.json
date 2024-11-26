@@ -1,0 +1,854 @@
+{
+    "papers": [
+        {
+            "paper_name": "paper_0.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 8
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 2
+                },
+                "socioeconomic terms": {
+                    "high-income": 4
+                },
+                "ethnographic terms": {
+                    "european descent": 4
+                }
+            }
+        },
+        {
+            "paper_name": "paper_1.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "anxiety": 5
+                },
+                "epigenetic terms": {
+                    "histone modification": 9
+                },
+                "socioeconomic terms": {
+                    "low-income": 7
+                },
+                "ethnographic terms": {
+                    "african descent": 7
+                }
+            }
+        },
+        {
+            "paper_name": "paper_2.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 4
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 9
+                },
+                "socioeconomic terms": {
+                    "low-income": 4
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 10
+                }
+            }
+        },
+        {
+            "paper_name": "paper_3.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 8
+                },
+                "epigenetic terms": {
+                    "CpG islands": 10
+                },
+                "socioeconomic terms": {
+                    "high-income": 9
+                },
+                "ethnographic terms": {
+                    "european descent": 5
+                }
+            }
+        },
+        {
+            "paper_name": "paper_4.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 5
+                },
+                "epigenetic terms": {
+                    "HPA axis dysregulation": 2
+                },
+                "socioeconomic terms": {
+                    "middle-income": 7
+                },
+                "ethnographic terms": {
+                    "latino/hispanic descent": 4
+                }
+            }
+        },
+        {
+            "paper_name": "paper_5.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 2
+                },
+                "epigenetic terms": {
+                    "methylation": 6
+                },
+                "socioeconomic terms": {
+                    "low-income": 8
+                },
+                "ethnographic terms": {
+                    "asian descent": 4
+                }
+            }
+        },
+        {
+            "paper_name": "paper_6.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 8
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 3
+                },
+                "socioeconomic terms": {
+                    "high-income": 1
+                },
+                "ethnographic terms": {
+                    "african descent": 4
+                }
+            }
+        },
+        {
+            "paper_name": "paper_7.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "suicide": 9
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 4
+                },
+                "socioeconomic terms": {
+                    "low-income": 3
+                },
+                "ethnographic terms": {
+                    "arab descent": 6
+                }
+            }
+        },
+        {
+            "paper_name": "paper_8.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "depression": 9
+                },
+                "epigenetic terms": {
+                    "CpG islands": 7
+                },
+                "socioeconomic terms": {
+                    "middle-income": 1
+                },
+                "ethnographic terms": {
+                    "european descent": 7
+                }
+            }
+        },
+        {
+            "paper_name": "paper_9.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 5
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 3
+                },
+                "socioeconomic terms": {
+                    "low-income": 2
+                },
+                "ethnographic terms": {
+                    "latino/hispanic descent": 4
+                }
+            }
+        },
+        {
+            "paper_name": "paper_10.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "depression": 3
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 4
+                },
+                "socioeconomic terms": {
+                    "middle-income": 8
+                },
+                "ethnographic terms": {
+                    "asian descent": 2
+                }
+            }
+        },
+        {
+            "paper_name": "paper_11.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 10
+                },
+                "epigenetic terms": {
+                    "CpG islands": 6
+                },
+                "socioeconomic terms": {
+                    "low-income": 10
+                },
+                "ethnographic terms": {
+                    "latino/hispanic descent": 2
+                }
+            }
+        },
+        {
+            "paper_name": "paper_12.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 6
+                },
+                "epigenetic terms": {
+                    "methylation": 6
+                },
+                "socioeconomic terms": {
+                    "high-income": 1
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 2
+                }
+            }
+        },
+        {
+            "paper_name": "paper_13.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 3
+                },
+                "epigenetic terms": {
+                    "demethylation": 5
+                },
+                "socioeconomic terms": {
+                    "high-income": 7
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_14.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 4
+                },
+                "epigenetic terms": {
+                    "histone modification": 5
+                },
+                "socioeconomic terms": {
+                    "middle-income": 8
+                },
+                "ethnographic terms": {
+                    "arab descent": 9
+                }
+            }
+        },
+        {
+            "paper_name": "paper_15.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 6
+                },
+                "epigenetic terms": {
+                    "demethylation": 10
+                },
+                "socioeconomic terms": {
+                    "low-income": 1
+                },
+                "ethnographic terms": {
+                    "asian descent": 7
+                }
+            }
+        },
+        {
+            "paper_name": "paper_16.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 10
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 7
+                },
+                "socioeconomic terms": {
+                    "low-income": 1
+                },
+                "ethnographic terms": {
+                    "european descent": 9
+                }
+            }
+        },
+        {
+            "paper_name": "paper_17.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 10
+                },
+                "epigenetic terms": {
+                    "HPA axis dysregulation": 1
+                },
+                "socioeconomic terms": {
+                    "middle-income": 7
+                },
+                "ethnographic terms": {
+                    "arab descent": 10
+                }
+            }
+        },
+        {
+            "paper_name": "paper_18.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "suicide": 3
+                },
+                "epigenetic terms": {
+                    "demethylation": 5
+                },
+                "socioeconomic terms": {
+                    "high-income": 9
+                },
+                "ethnographic terms": {
+                    "asian descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_19.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 5
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 7
+                },
+                "socioeconomic terms": {
+                    "high-income": 9
+                },
+                "ethnographic terms": {
+                    "latino/hispanic descent": 10
+                }
+            }
+        },
+        {
+            "paper_name": "paper_20.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "anxiety": 7
+                },
+                "epigenetic terms": {
+                    "demethylation": 4
+                },
+                "socioeconomic terms": {
+                    "low-income": 3
+                },
+                "ethnographic terms": {
+                    "european descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_21.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "depression": 9
+                },
+                "epigenetic terms": {
+                    "histone modification": 2
+                },
+                "socioeconomic terms": {
+                    "middle-income": 7
+                },
+                "ethnographic terms": {
+                    "asian descent": 4
+                }
+            }
+        },
+        {
+            "paper_name": "paper_22.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 9
+                },
+                "epigenetic terms": {
+                    "methylation": 3
+                },
+                "socioeconomic terms": {
+                    "high-income": 6
+                },
+                "ethnographic terms": {
+                    "asian descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_23.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 2
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 8
+                },
+                "socioeconomic terms": {
+                    "low-income": 8
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 6
+                }
+            }
+        },
+        {
+            "paper_name": "paper_24.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "anxiety": 6
+                },
+                "epigenetic terms": {
+                    "demethylation": 2
+                },
+                "socioeconomic terms": {
+                    "low-income": 6
+                },
+                "ethnographic terms": {
+                    "european descent": 3
+                }
+            }
+        },
+        {
+            "paper_name": "paper_25.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 3
+                },
+                "epigenetic terms": {
+                    "histone modification": 4
+                },
+                "socioeconomic terms": {
+                    "middle-income": 8
+                },
+                "ethnographic terms": {
+                    "asian descent": 3
+                }
+            }
+        },
+        {
+            "paper_name": "paper_26.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 4
+                },
+                "epigenetic terms": {
+                    "HPA axis dysregulation": 2
+                },
+                "socioeconomic terms": {
+                    "high-income": 3
+                },
+                "ethnographic terms": {
+                    "arab descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_27.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 3
+                },
+                "epigenetic terms": {
+                    "demethylation": 3
+                },
+                "socioeconomic terms": {
+                    "low-income": 3
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_28.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 3
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 9
+                },
+                "socioeconomic terms": {
+                    "middle-income": 3
+                },
+                "ethnographic terms": {
+                    "arab descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_29.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "depression": 2
+                },
+                "epigenetic terms": {
+                    "methylation": 10
+                },
+                "socioeconomic terms": {
+                    "low-income": 5
+                },
+                "ethnographic terms": {
+                    "asian descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_30.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "anxiety": 8
+                },
+                "epigenetic terms": {
+                    "demethylation": 5
+                },
+                "socioeconomic terms": {
+                    "high-income": 6
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 7
+                }
+            }
+        },
+        {
+            "paper_name": "paper_31.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "depression": 9
+                },
+                "epigenetic terms": {
+                    "methylation": 3
+                },
+                "socioeconomic terms": {
+                    "low-income": 9
+                },
+                "ethnographic terms": {
+                    "asian descent": 2
+                }
+            }
+        },
+        {
+            "paper_name": "paper_32.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "suicide": 5
+                },
+                "epigenetic terms": {
+                    "methylation": 8
+                },
+                "socioeconomic terms": {
+                    "low-income": 6
+                },
+                "ethnographic terms": {
+                    "african descent": 6
+                }
+            }
+        },
+        {
+            "paper_name": "paper_33.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 1
+                },
+                "epigenetic terms": {
+                    "CpG islands": 9
+                },
+                "socioeconomic terms": {
+                    "middle-income": 3
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 2
+                }
+            }
+        },
+        {
+            "paper_name": "paper_34.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 10
+                },
+                "epigenetic terms": {
+                    "methylation": 1
+                },
+                "socioeconomic terms": {
+                    "low-income": 10
+                },
+                "ethnographic terms": {
+                    "arab descent": 2
+                }
+            }
+        },
+        {
+            "paper_name": "paper_35.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 9
+                },
+                "epigenetic terms": {
+                    "demethylation": 5
+                },
+                "socioeconomic terms": {
+                    "low-income": 4
+                },
+                "ethnographic terms": {
+                    "latino/hispanic descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_36.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "anxiety": 10
+                },
+                "epigenetic terms": {
+                    "CpG islands": 2
+                },
+                "socioeconomic terms": {
+                    "middle-income": 10
+                },
+                "ethnographic terms": {
+                    "european descent": 10
+                }
+            }
+        },
+        {
+            "paper_name": "paper_37.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "anxiety": 8
+                },
+                "epigenetic terms": {
+                    "CpG islands": 2
+                },
+                "socioeconomic terms": {
+                    "high-income": 7
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_38.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 6
+                },
+                "epigenetic terms": {
+                    "HPA axis dysregulation": 4
+                },
+                "socioeconomic terms": {
+                    "low-income": 5
+                },
+                "ethnographic terms": {
+                    "arab descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_39.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 6
+                },
+                "epigenetic terms": {
+                    "methylation": 2
+                },
+                "socioeconomic terms": {
+                    "middle-income": 3
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_40.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "suicide": 4
+                },
+                "epigenetic terms": {
+                    "childhood abuse": 4
+                },
+                "socioeconomic terms": {
+                    "high-income": 1
+                },
+                "ethnographic terms": {
+                    "latino/hispanic descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_41.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "PTSD": 5
+                },
+                "epigenetic terms": {
+                    "methylation": 9
+                },
+                "socioeconomic terms": {
+                    "low-income": 6
+                },
+                "ethnographic terms": {
+                    "european descent": 3
+                }
+            }
+        },
+        {
+            "paper_name": "paper_42.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 3
+                },
+                "epigenetic terms": {
+                    "HPA axis dysregulation": 6
+                },
+                "socioeconomic terms": {
+                    "high-income": 5
+                },
+                "ethnographic terms": {
+                    "african descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_43.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "anxiety": 10
+                },
+                "epigenetic terms": {
+                    "CpG islands": 6
+                },
+                "socioeconomic terms": {
+                    "low-income": 9
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 6
+                }
+            }
+        },
+        {
+            "paper_name": "paper_44.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "suicide": 6
+                },
+                "epigenetic terms": {
+                    "methylation": 4
+                },
+                "socioeconomic terms": {
+                    "middle-income": 3
+                },
+                "ethnographic terms": {
+                    "arab descent": 4
+                }
+            }
+        },
+        {
+            "paper_name": "paper_45.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 9
+                },
+                "epigenetic terms": {
+                    "HPA axis dysregulation": 4
+                },
+                "socioeconomic terms": {
+                    "high-income": 10
+                },
+                "ethnographic terms": {
+                    "arab descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_46.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "bipolar": 10
+                },
+                "epigenetic terms": {
+                    "CpG islands": 3
+                },
+                "socioeconomic terms": {
+                    "high-income": 5
+                },
+                "ethnographic terms": {
+                    "arab descent": 1
+                }
+            }
+        },
+        {
+            "paper_name": "paper_47.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 2
+                },
+                "epigenetic terms": {
+                    "methylation": 9
+                },
+                "socioeconomic terms": {
+                    "middle-income": 6
+                },
+                "ethnographic terms": {
+                    "african descent": 9
+                }
+            }
+        },
+        {
+            "paper_name": "paper_48.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "generational trauma": 4
+                },
+                "epigenetic terms": {
+                    "demethylation": 8
+                },
+                "socioeconomic terms": {
+                    "high-income": 6
+                },
+                "ethnographic terms": {
+                    "indigenous descent": 8
+                }
+            }
+        },
+        {
+            "paper_name": "paper_49.pdf",
+            "term_counts": {
+                "mental health terms": {
+                    "depression": 2
+                },
+                "epigenetic terms": {
+                    "histone modification": 3
+                },
+                "socioeconomic terms": {
+                    "middle-income": 1
+                },
+                "ethnographic terms": {
+                    "latino/hispanic descent": 4
+                }
+            }
+        }
+    ]
+}

@@ -168,7 +168,7 @@ def generate_similar_terms(term_list, model, corpus, topn=50, per_term=False, mo
         logging.info(f"Top {topn} similar terms: {top_similar_terms}")
         return top_similar_terms
     
-def expand_terms_for_query(terms, max_depth=2, topn=100, per_term = False):
+def expand_terms_for_query(terms, max_depth=1, topn=100, per_term = False):
     """
     Expand input terms using Wikipedia and semantic similarity.
 
