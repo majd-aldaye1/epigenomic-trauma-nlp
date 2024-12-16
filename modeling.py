@@ -59,7 +59,7 @@ Key Features:
 """
 import logging, time, warnings, json, os, nltk
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'  # Suppress all but critical TensorFlow logs
-warnings.filterwarnings("ignore", category=FutureWarning)
+warnings.filterwarnings("ignore", category=FutureWarning) # Ignore future warnings to keep logs clean
 nltk.download('punkt') # Ensure the NLTK tokenizer data is available
 from collections import Counter, defaultdict
 from transformers import pipeline
@@ -99,13 +99,15 @@ def categorize_terms(term_counts, categories):
         dict: Categorized term counts.
     """
     logging.debug("Starting term categorization...")
-    categorized = defaultdict(lambda: defaultdict(int)) 
+    categorized = defaultdict(lambda: defaultdict(int)) # Nested dictionary for counts
     logging.debug(f"Term counts: {term_counts}")
 
+    # Ensure input is a dictionary
     if not isinstance(term_counts.get("mental health terms", {}), dict):
         raise TypeError("Expected 'term_counts' to be a dictionary.")
 
-    if isinstance(categories, dict):  # Handle dictionary (e.g., ethnographic_terms)
+    # Handle dictionary structure for categorization
+    if isinstance(categories, dict):  # Handle  nesteddictionary (e.g., ethnographic_terms)
         for term, count in term_counts.items():
             for category, subterms in categories.items():
                 if isinstance(subterms, list) and term in subterms:
@@ -142,17 +144,18 @@ def analyze_text_with_huggingface(cleaned_text):
     chunks = sent_tokenize(cleaned_text)  # Use sentence tokenization for a single line of text
     logging.debug(f"Generated {len(chunks)} chunks: {chunks}")
 
+    # Start processing chunks
     start_time = time.time()
     for chunk in chunks:
         try:
-            # Classify the current chunk
+            # Run the classifier on each current chunk
             logging.debug(f"Processing chunk: {chunk}")
             result = classifier(chunk, labels, multi_label=True)  # Note: `multi_label=True` is the correct argument
             logging.debug(f"Result for chunk: {result}")   
 
             # Add high-confidence terms to the additional terms counter
             for label, score in zip(result["labels"], result["scores"]):
-                if score > 0.3:  # Add only high-confidence terms
+                if score > 0.3:  # Include terms with confidence > 0.3
                     additional_terms[label] += 1
         except Exception as e:
             logging.exception(f"Error processing chunk '{chunk}': {e}")
@@ -171,6 +174,7 @@ def process_single_paper(args):
     term_counts = paper["term_counts"]
     cleaned_text = paper["cleaned_text"]
 
+    # Skip papers with missing data
     if not term_counts:
         logging.warning(f"No term counts for paper {paper['paper_name']}. Skipping.")
         return None
@@ -179,6 +183,7 @@ def process_single_paper(args):
         logging.warning(f"Empty cleaned_text for paper {paper['paper_name']}. Skipping.")
         return None
 
+    # Analyze text for additional terms
     additional_terms = analyze_text_with_huggingface(cleaned_text)
     logging.debug(f"Additional terms extracted: {additional_terms}")
 
@@ -205,7 +210,7 @@ def process_articles(input_file, output_file):
         logging.debug(f"Loaded input data: {data}")
     papers = data["papers"]
 
-    # Parallel processing with indices
+    # Process papers in parallel using ProcessPoolExecutor
     logging.info(f"Processing {len(papers)} papers in parallel...")
     with ProcessPoolExecutor() as executor:
         results = list(executor.map(process_single_paper, enumerate(papers, start=1)))
