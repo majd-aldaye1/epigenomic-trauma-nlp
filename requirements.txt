@@ -1,25 +1,41 @@
-pandas
-plotly.express
-plotly.graph_objects
-dash
-itertools
-regex
-json
-subprocess
+# Essential libraries
 numpy
-random
+pandas
+seaborn
+matplotlib
+plotly
+dash
+base64
+io
+json
+regex
 logging
+warnings
+os
+shlex
+random
+
+# NLP and Text Processing
+nltk
 spacy
-unittest
+sentence-transformers
+wikipedia-api
+transformers
 gensim
 pyLDAvis
 networkx
-seaborn
-io
-base64
-sentence_transformers
-wikipediaapi
-rapidfuzz
-nltk
-fitz
+
+# File Handling and PDF Processing
+pymupdf  # fitz library
 chardet
+
+# Parallel Processing
+concurrent.futures  # Standard library for multiprocessing
+
+# Machine Learning and Embedding Models
+torch
+datasets
+huggingface-hub
+
+# Testing
+unittest
