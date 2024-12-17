@@ -130,7 +130,7 @@ def fetch_papers(query, scholar_pages=500, min_year=1900, num_papers=10, output_
 
 if __name__ == "__main__":
     # Path to the expanded terms JSON file
-    path_to_file = "./expanded_terms.json"
+    path_to_file = "./scripts/json/expanded_terms.json"
 
     # Step 1: Generate the query ensuring at least 5 terms per category
     query = generate_query(path_to_file)
