@@ -84,8 +84,6 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 download("punkt")
 download("stopwords")
 
-# Load SciSpacy's biomedical model
-# nlp = spacy.load("en_core_sci_lg")
 logging.info("Loading SpaCy model...")
 try:
     nlp = spacy.load("en_core_web_trf")
@@ -220,20 +218,6 @@ def categorize_terms(text, expanded_terms):
     return term_counts
 
 
-def compute_co_occurrence(term_counts):
-    """Compute a co-occurrence matrix for terms across categories."""
-    co_occurrence_matrix = defaultdict(lambda: defaultdict(int))
-    for category1, terms1 in term_counts.items():
-        for category2, terms2 in term_counts.items():
-            if category1 != category2 and len(terms1) > 0 and len(terms2) > 0:
-                # Count each pair of terms that appear
-                for term1 in terms1:
-                    for term2 in terms2:
-                        co_occurrence_matrix[category1][term2] += terms1[term1]
-    return co_occurrence_matrix
-
-
-
 def extract_norp_entities(doc):
     """
     Extract NORP entities from the processed text using NER.
@@ -260,7 +244,7 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
     logging.info("Starting article preprocessing...")
     processed_articles = []
     global_term_counts = {category: Counter() for category in expanded_terms.keys()}
-    global_relationships = defaultdict(lambda: {"terms": Counter(), "co_occurrence_count": 0, "jaccard_similarity": 0.0})
+    global_relationships = defaultdict(lambda: {"terms": Counter()})
     MAX_NLP_LENGTH = 50000  # Limit for NLP processing
 
     for file_name in os.listdir(input_dir):
@@ -313,8 +297,6 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
             for category, counts in term_counts.items():
                 global_term_counts[category].update(counts)
 
-            # Compute co-occurrence matrix
-            co_occurrence_matrix = compute_co_occurrence(term_counts)
 
             # Add metadata (optional step based on text heuristics)
             disparity_metadata = {
@@ -328,22 +310,12 @@ def preprocess_articles(input_dir=RAW_ARTICLES_DIR, expanded_terms=expanded_term
                 "paper_name": file_name,
                 "cleaned_text": lemmatized_text,
                 "term_counts": term_counts,
-                "co_occurrence_matrix": co_occurrence_matrix,
                 "disparity_metadata": disparity_metadata
             })
 
         except Exception as e:
             logging.error(f"Error processing file {file_name}: {e}", exc_info=True)
             continue
-
-    # Calculate Jaccard similarities and global relationships
-    for category1, terms1 in global_term_counts.items():
-        for category2, terms2 in global_term_counts.items():
-            if category1 != category2:
-                intersection = sum((terms1 & terms2).values())
-                union = sum((terms1 | terms2).values())
-                global_relationships[(category1, category2)]["jaccard_similarity"] = intersection / union if union > 0 else 0.0
-                global_relationships[(category1, category2)]["co_occurrence_count"] += intersection
 
     # Inline conversion of tuple keys to strings
     def convert_tuple_keys(d):
