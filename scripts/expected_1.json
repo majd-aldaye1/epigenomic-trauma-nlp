@@ -1,0 +1,58 @@
+{
+    "papers": [
+        {
+            "paper_id": 1,
+            "categorized_counts": {
+                "Mental Health": {
+                    "PTSD": 2,
+                    "anxiety": 3
+                },
+                "Epigenetic": {
+                    "DNA methylation": 1,
+                    "FKBP5": 1
+                },
+                "Socioeconomic": {
+                    "low-income": 2
+                },
+                "Ethnographic": {
+                    "African descent": 2
+                }
+            }
+        },
+        {
+            "paper_id": 2,
+            "categorized_counts": {
+                "Mental Health": {
+                    "stress": 2
+                },
+                "Epigenetic": {
+                    "FKBP5": 1
+                },
+                "Socioeconomic": {
+                    "low-income": 2
+                },
+                "Ethnographic": {
+                    "Hispanic": 1,
+                    "African descent": 1
+                }
+            }
+        },
+        {
+            "paper_id": 3,
+            "categorized_counts": {
+                "Mental Health": {
+                    "PTSD": 3,
+                    "trauma": 2
+                },
+                "Epigenetic": {
+                    "DNA methylation": 2,
+                    "BDNF": 1
+                },
+                "Socioeconomic": {
+                    "low-income": 1
+                },
+                "Ethnographic": {}
+            }
+        }
+    ]
+}

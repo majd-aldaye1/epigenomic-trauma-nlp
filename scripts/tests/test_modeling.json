@@ -1,0 +1,26 @@
+{
+    "papers": [
+        {
+            "paper_name": "Paper 1",
+            "cleaned_text": "This study highlights PTSD and anxiety linked to DNA methylation. Individuals of African descent and low-income backgrounds are disproportionately affected.",
+            "term_counts": {
+                "Mental Health Terms": {"PTSD": 1},
+                "Epigenetic Terms": {"DNA methylation": 2},
+                "Socioeconomic Terms": {"low-income": 1},
+                "Ethnographic Terms": {"African descent": 1}
+            },
+            "co_occurrence_matrix": {}
+        },
+        {
+            "paper_name": "Paper 2",
+            "cleaned_text": "This article explores stress response and BDNF related to generational trauma in Hispanic communities.",
+            "term_counts": {
+                "Mental Health Terms": {"generational trauma": 1},
+                "Epigenetic Terms": {"BDNF": 2},
+                "Socioeconomic Terms": {},
+                "Ethnographic Terms": {"Latino/Hispanic descent": 1}
+            },
+            "co_occurrence_matrix": {}
+        }
+    ]
+}

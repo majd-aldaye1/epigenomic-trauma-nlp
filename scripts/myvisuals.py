@@ -22,15 +22,42 @@ Applications:
 This tool supports the meta-analysis project by offering a visual narrative of term relationships, making it easier to identify patterns and insights in the data.
 """
 
-import json
+import json, base64, logging
 from collections import defaultdict
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from io import BytesIO
-import base64
 from dash import Dash, html, dcc
 import plotly.graph_objects as go
+
+# Configure logging
+logging.basicConfig(
+    level=logging.INFO,  # Set the logging level to INFO
+    format="%(asctime)s - %(levelname)s - %(message)s",  # Define the log format
+    handlers=[logging.StreamHandler()]  # Ensure logs are sent to the console
+)
+
+# File paths
+processed_file = "./final_modeling.json"  # Output file from modeling.py
+
+# Load processed topics data
+def load_json(file_path):
+    """
+    Load JSON data from a file and validate its structure.
+    """
+    with open(file_path, "r", encoding="utf-8") as file:
+        data = json.load(file)
+        if not isinstance(data, dict) or "papers" not in data:
+            raise ValueError("Invalid JSON structure: Expected a dictionary with a 'papers' key.")
+        if not isinstance(data["papers"], list):
+            raise ValueError("Invalid JSON structure: 'papers' key must contain a list of dictionaries.")
+        return data["papers"]  # Return the list of papers
+
+# Correct JSON loading
+processed_data = load_json(processed_file)
+# Debugging: Print the structure of processed_data
+logging.info(f"Loaded processed data: {processed_data}")
 
 # Define terms
 mental_health_terms = [ 
@@ -38,8 +65,8 @@ mental_health_terms = [
     "suicide", "generational trauma",
 ]
 epigenetic_terms = [
-    "methylation", "demethylation", "CpG islands", 
-    "histone modification", "HPA axis dysregulation", "childhood abuse" 
+    "methylation", "CpG islands", 
+    "histone modification", "HPA axis dysregulation", "FKBP5", "BDNF"
 ]
 socioeconomic_terms = [
     "low-income", "middle-income", "high-income"
@@ -49,53 +76,111 @@ ethnicity_terms = [
     "indigenous descent", "arab descent", "european descent"
 ]
 
-# File paths
-preprocessed_file = "./preprocessed_articles.json"
+# Function to flatten terms into pre-defined categories
+def flatten_to_predefined_categories(papers):
+    """
+    Map terms in categorized_counts to pre-defined categories.
+    Terms not matching the pre-defined categories will be skipped.
+    """
+    counts = defaultdict(lambda: defaultdict(int))
+    logging.info(f"Flattening categorized counts for {len(papers)} papers...")
 
-# Load JSON data
-def load_json(file_path):
-    with open(file_path, "r", encoding="utf-8") as file:
-        return json.load(file)
+    for paper_idx, paper in enumerate(papers, start=1):
+        logging.info(f"Processing paper ID: {paper.get('paper_id', 'Unknown')}, Index: {paper_idx}")
 
-preprocessed_data = load_json(preprocessed_file)
+        # Validate the structure of the paper
+        if "categorized_counts" not in paper:
+            logging.warning(f"Skipping paper {paper_idx} without 'categorized_counts'.")
+            continue
+
+        categorized = paper["categorized_counts"]
+        # Aggregate counts for mental health terms
+        if "Mental Health" in categorized:
+            for term, count in categorized["Mental Health"].items():
+                #if term.lower() in [t.lower() for t in mental_health_terms]:
+                    counts["mental_health"][term] += count
+                    logging.debug(f"Added {count} to 'mental_health' category for term '{term}'.")
+
+        # Aggregate counts for epigenetic terms
+        if "Epigenetic" in categorized:
+            for term, count in categorized["Epigenetic"].items():
+                #if term.lower() in [t.lower() for t in epigenetic_terms]:
+                    counts["epigenetic"][term] += count
+                    logging.debug(f"Added {count} to 'epigenetic' category for term '{term}'.")
+                # else:
+                #     logging.warning(f"Term '{term}' in 'Epigenetic' does not match predefined terms and is skipped.")
+
+        # Aggregate counts for socioeconomic terms
+        if "Socioeconomic" in categorized:
+            for term, count in categorized["Socioeconomic"].items():
+                #if term.lower() in [t.lower() for t in socioeconomic_terms]:
+                    counts["socioeconomic"][term] += count
+                    logging.debug(f"Added {count} to 'socioeconomic' category for term '{term}'.")
+
+        # Aggregate counts for ethnicity terms
+        if "Ethnographic" in categorized:
+            for term, count in categorized["Ethnographic"].items():
+                #if term.lower() in [t.lower() for t in ethnicity_terms]:
+                    counts["ethnicity"][term] += count
+                    logging.debug(f"Added {count} to 'ethnicity' category for term '{term}'.")
+                # else:
+                #     logging.warning(f"Term '{term}' in 'Ethnographic' does not match predefined terms and is skipped.")
+        logging.debug(f"Categorized counts for paper {paper_idx}: {categorized}")
+        logging.debug(f"Counts after processing paper {paper_idx}: {counts}")
+
+    logging.info("Flattening complete. Aggregated counts ready.")
+    logging.info(f"Flattened counts: {counts}")
+    return counts
 
 # Initialize counts dictionary
-counts = defaultdict(lambda: defaultdict(int))
-
-# Aggregate counts for each term
-for paper in preprocessed_data["papers"]:
-    term_counts = paper["term_counts"]
-    for term in mental_health_terms:
-        counts["mental_health"][term] += term_counts["mental health terms"].get(term, 0)
-    for term in epigenetic_terms:
-        counts["epigenetic"][term] += term_counts["epigenetic terms"].get(term, 0)
-    for term in socioeconomic_terms:
-        counts["socioeconomic"][term] += term_counts["socioeconomic terms"].get(term, 0)
-    for term in ethnicity_terms:
-        counts["ethnicity"][term] += term_counts["ethnographic terms"].get(term, 0)
+counts = flatten_to_predefined_categories(processed_data)
+logging.info(f"Flattened counts after processing all papers: {dict(counts)}")
 
 # Function to prepare heatmap data
 def prepare_heatmap_data(category1, category2):
+    """
+    Prepare heatmap data by aggregating counts for two categories.
+    """
     data = []
+    logging.info(f"Preparing heatmap data for {category1} vs {category2}...")
     for term1 in counts[category1]:
         for term2 in counts[category2]:
+            logging.debug(f"Combining terms: {term1} ({counts[category1][term1]}) and {term2} ({counts[category2][term2]})")
             combined_count = counts[category1][term1] + counts[category2][term2]
             data.append({
                 category1: term1,
                 category2: term2,
                 "Count": combined_count
             })
+            logging.debug(f"Current row: {{'{category1}': '{term1}', '{category2}': '{term2}', 'Count': {combined_count}}}")
+            logging.debug(f"Aggregating {term1} ({counts[category1][term1]}) and {term2} ({counts[category2][term2]})")
+    logging.info(f"Prepared heatmap data for {category1} vs {category2}:\n{data}")
     return pd.DataFrame(data)
 
 # Function to create heatmap and save as base64 image
 def create_heatmap(df, category1, category2, title):
-    heatmap_data = df.pivot_table(
-        index=category1,
-        columns=category2,
-        values="Count",
-        aggfunc="sum",
-        fill_value=0
-    )
+    """
+    Create a heatmap visualization from a dataframe.
+    """
+    if df.empty:
+        logging.warning(f"No data to generate heatmap for {category1} vs {category2}.")
+        return None
+    logging.info(f"DataFrame content:\n{df}")
+
+    logging.debug(f"DataFrame before pivot for {category1} vs {category2}: {df}")
+    try:
+        heatmap_data = df.pivot_table(
+            index=category1,
+            columns=category2,
+            values="Count",
+            aggfunc="sum",
+            fill_value=0
+        )
+        logging.info(f"Pivot table created successfully for {category1} vs {category2}.")
+    except KeyError as e:
+        logging.error(f"Missing expected column: {e}")
+        raise
+
     plt.figure(figsize=(8, 6))
     sns.heatmap(
         heatmap_data,
@@ -132,6 +217,9 @@ heatmap3 = create_heatmap(df3, "mental_health", "epigenetic", "Mental Health vs.
 
 # Simplified 3D Scatter Plot
 def create_simple_3d_graph():
+    """
+    Create a simplified 3D scatter plot with top terms in each category.
+    """
     # Focus on the top 3 terms in each category for simplicity
     top_mh_terms = sorted(counts["mental_health"].items(), key=lambda x: -x[1])[:3]
     top_ep_terms = sorted(counts["epigenetic"].items(), key=lambda x: -x[1])[:3]
@@ -139,6 +227,7 @@ def create_simple_3d_graph():
 
     # Prepare data for the simplified plot
     x, y, z, sizes = [], [], [], []
+    logging.debug(f"3D Scatter Data: x={x}, y={y}, z={z}, sizes={sizes}")
     for mh_term, mh_count in top_mh_terms:
         for ep_term, ep_count in top_ep_terms:
             for socio_term, socio_count in top_socio_terms:
